@@ -107,18 +107,19 @@ nav:
   - 홈:
     - 소개: index.md
     - 시작하기: getting-started.md
-  - Part 1 - 기초 개발:
+  - Part 1 - 기초 학습:
     - Chapter 1 - Python 기초: chapter1.md
     - Chapter 2 - Tkinter GUI 기초: chapter2.md
+  - Part 2 - 기초 개발:
     - Chapter 3 - 기본 GUI 구조: chapter3.md
     - Chapter 4 - 드래그 앤 드롭: chapter4.md
     - Chapter 5 - 파일명 변경 로직: chapter5.md
     - Chapter 6 - 고급 조건과 기능: chapter6.md
-  - Part 2 - 전문 개발:
+  - Part 3 - 전문 개발:
     - Chapter 7 - 모듈화하기: chapter7.md
     - Chapter 8 - 단위 테스트: chapter8.md
     - Chapter 9 - MkDocs 적용: chapter9.md
-  - Part 3 - 배포와 운영:
+  - Part 4 - 배포와 운영:
     - Chapter 10 - GitHub Actions: chapter10.md
     - Chapter 11 - PyPI 배포: chapter11.md
     - Chapter 12 - PyInstaller: chapter12.md
