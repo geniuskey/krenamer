@@ -59,11 +59,6 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Validate MkDocs config
-        run: |
-          mkdocs --version
-          mkdocs config-info
-
       - name: Build with MkDocs
         run: |
           # Set site_url if using GitHub Pages
