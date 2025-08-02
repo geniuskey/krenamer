@@ -1,0 +1,3 @@
+"""
+KRenamer test package
+"""

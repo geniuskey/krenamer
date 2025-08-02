@@ -1,0 +1,117 @@
+site_name: KRenamer
+site_description: Python tkinter를 사용한 한국어 Windows 파일 리네이머 개발 가이드
+site_author: GeniusKey
+site_url: https://geniuskey.github.io/krenamer
+
+# Repository
+repo_name: geniuskey/krenamer
+repo_url: https://github.com/geniuskey/krenamer
+
+# Copyright
+copyright: Copyright &copy; 2024 GeniusKey
+
+# Configuration
+theme:
+  name: material
+  language: ko
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Noto Sans KR
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: geniuskey
+      repo: krenamer
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Plugins
+plugins:
+  - search:
+      lang: ko
+  - minify:
+      minify_html: true
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/geniuskey
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/krenamer/
+
+# Page tree
+nav:
+  - 소개:
+    - index.md
+    - getting-started.md
+  - 개발 과정:
+    - 챕터 1 - 기본 GUI: chapter1.md
+    - 챕터 2 - 드래그 앤 드롭: chapter2.md
+    - 챕터 3 - 파일명 변경: chapter3.md
+    - 챕터 4 - 고급 기능: chapter4.md
+    - 최종 완성: final.md
+  - 기술 참고:
+    - 핵심 기술: technical-guide.md
+    - API 레퍼런스: api-reference.md
+    - 배포 가이드: deployment.md
+  - 부록:
+    - FAQ: faq.md
+    - 문제해결: troubleshooting.md

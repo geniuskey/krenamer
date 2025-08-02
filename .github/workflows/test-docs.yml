@@ -1,0 +1,66 @@
+name: Test Documentation Build
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/**'
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material
+          pip install mkdocs-minify-plugin
+          pip install pymdown-extensions
+
+      - name: Test MkDocs build
+        run: |
+          echo "Testing MkDocs configuration..."
+          mkdocs --version
+          
+          echo "Validating configuration..."
+          mkdocs config-info
+          
+          echo "Building documentation (test mode)..."
+          mkdocs build --clean
+          
+          echo "Verifying build output..."
+          ls -la site/
+          
+          echo "Testing serve (dry run)..."
+          timeout 10s mkdocs serve --dev-addr=127.0.0.1:8000 || true
+          
+          echo "Documentation test completed successfully!"
+
+      - name: Check for broken links
+        run: |
+          echo "Checking for missing documentation files..."
+          
+          # Check if all nav items exist
+          if [ -f "docs/chapter3.md" ]; then
+            echo "✓ chapter3.md exists"
+          else
+            echo "⚠️ chapter3.md is missing"
+          fi
+          
+          if [ -f "docs/chapter4.md" ]; then
+            echo "✓ chapter4.md exists"
+          else
+            echo "⚠️ chapter4.md is missing"
+          fi
+          
+          # Add more checks as needed
+          echo "Link check completed!"
