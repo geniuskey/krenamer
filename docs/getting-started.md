@@ -32,17 +32,17 @@ pip install mkdocs mkdocs-material
 완성된 프로젝트의 구조는 다음과 같습니다:
 
 ```
-renamer/
+krenamer/
 ├── src/
-│   ├── renamer-ch1/        # Chapter 1: 기본 GUI
+│   ├── krenamer-ch1/        # Chapter 1: Python 기초
 │   │   └── main.py
-│   ├── renamer-ch2/        # Chapter 2: 드래그 앤 드롭
+│   ├── krenamer-ch2/        # Chapter 2: Tkinter GUI 기초
 │   │   └── main.py
-│   ├── renamer-ch3/        # Chapter 3: 파일명 변경
+│   ├── krenamer-ch3/        # Chapter 3: 기본 GUI 구조
 │   │   └── main.py
-│   ├── renamer-ch4/        # Chapter 4: 고급 기능
+│   ├── krenamer-ch4/        # Chapter 4: 드래그 앤 드롭
 │   │   └── main.py
-│   └── renamer/            # 최종 완성 버전
+│   └── krenamer/            # 최종 완성 버전
 │       ├── __init__.py
 │       ├── core.py
 │       ├── gui.py
@@ -60,7 +60,7 @@ renamer/
 
 ```bash
 # Chapter 1 디렉토리로 이동
-cd src/renamer-ch1
+cd src/krenamer-ch1
 
 # 예제 실행
 python main.py
@@ -106,7 +106,7 @@ Chapter 1 예제의 주요 구성 요소를 살펴보겠습니다:
 === "윈도우 설정"
     ```python
     def setup_window(self):
-        self.root.title("Renamer - Chapter 1: Basic GUI")
+        self.root.title("KRenamer - Chapter 1: Basic GUI")
         self.root.geometry("600x400")
         self.root.resizable(True, True)
         self.center_window()

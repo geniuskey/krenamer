@@ -1,471 +1,783 @@
-# Chapter 2: 드래그 앤 드롭 기능
+# Chapter 2: Tkinter GUI 기초
 
-이번 챕터에서는 사용자가 파일을 직접 드래그 앤 드롭할 수 있는 기능을 추가하고, 실제 파일 시스템과 상호작용하는 기능을 구현해보겠습니다.
+## 👋 GUI 프로그램의 세계로!
 
-## 🎯 학습 목표
+안녕하세요! Chapter 1에서 파이썬 기초를 배웠으니, 이제 진짜 재미있는 부분을 시작해봅시다! 
 
-- tkinterdnd2 라이브러리 활용법 익히기
-- 파일 시스템 접근 및 파일 정보 처리
-- 사용자 친화적인 파일 관리 인터페이스 구현
-- 에러 처리 및 예외 상황 대응
+지금까지는 검은 화면에 글자만 나오는 프로그램을 만들었는데, 이번에는 **버튼, 입력창, 메뉴가 있는 진짜 프로그램**을 만들어보겠습니다. 마치 윈도우즈의 메모장이나 계산기처럼요!
 
-## 📦 필요한 라이브러리
+## 🎯 이번 챕터에서 배울 것들
 
-### tkinterdnd2 설치
+우리가 만들 GUI(그래픽 사용자 인터페이스) 프로그램:
+- 🖼️ 창(윈도우) 만들기
+- 🔘 버튼 추가하고 클릭 이벤트 처리하기
+- 📝 텍스트 입력창과 출력 화면 만들기
+- 📋 파일 목록을 보여주는 리스트
+- 🎨 예쁘게 배치하고 색상 꾸미기
 
-```bash
-pip install tkinterdnd2
-```
+**Tkinter를 사용하는 이유:**
+- ✅ 파이썬에 기본으로 포함되어 있음 (별도 설치 불필요)
+- ✅ 배우기 쉬움 (초보자 친화적)
+- ✅ 윈도우, 맥, 리눅스 모두에서 동작
+- ✅ KRenamer 같은 간단한 프로그램에 완벽
 
-!!! info "tkinterdnd2란?"
-    tkinterdnd2는 tkinter에 드래그 앤 드롭 기능을 추가해주는 서드파티 라이브러리입니다.
-    Windows, macOS, Linux에서 모두 동작합니다.
+## 📚 단계별 학습하기
 
-## 🔧 핵심 기능 설계
+### 1단계: 첫 번째 창 만들어보기 🖼️
 
-### 드래그 앤 드롭 플로우
+프로그래밍에서 "Hello World!"는 전통입니다. GUI에서는 "첫 번째 창 만들기"가 그 시작이에요!
 
-```mermaid
-graph TD
-    A[사용자가 파일 드래그] --> B{드롭 영역에 놓음}
-    B -->|성공| C[파일 경로 추출]
-    B -->|실패| D[무시]
-    C --> E[파일 유효성 검사]
-    E -->|유효| F[파일 목록에 추가]
-    E -->|무효| G[에러 메시지]
-    F --> H[UI 업데이트]
-```
-
-### 향상된 파일 관리
-
-- **중복 파일 체크**: 이미 추가된 파일은 제외
-- **파일 정보 표시**: 파일명, 크기, 확장자 등
-- **파일 개수 카운터**: 현재 로드된 파일 수 표시
-- **선택적 제거**: 다중 선택으로 여러 파일 동시 제거
-
-## 💻 코드 구현
-
-### 1. 라이브러리 Import 및 초기 설정
-
-```python linenums="1" title="src/renamer-ch2/main.py"
-#!/usr/bin/env python3
-"""
-Chapter 2: Drag & Drop Functionality
-드래그 앤 드롭 기능을 추가한 GUI
-"""
-
+```python linenums="1" title="src/krenamer-ch2/step1_hello_window.py"
 import tkinter as tk
-from tkinter import ttk
-import os
-from pathlib import Path
 
-try:
-    from tkinterdnd2 import DND_FILES, TkinterDnD
-    DND_AVAILABLE = True
-except ImportError:
-    DND_AVAILABLE = False
+print("🎉 첫 번째 GUI 프로그램을 만들어보자!")
+
+# 1단계: 기본 창 만들기
+root = tk.Tk()  # 새로운 창을 만듭니다
+root.title("내 첫 번째 GUI 프로그램")  # 창 제목 설정
+root.geometry("400x300")  # 창 크기 설정 (가로x세로)
+
+# 2단계: 간단한 텍스트 추가
+welcome_label = tk.Label(root, text="안녕하세요! GUI 세계에 오신 것을 환영합니다! 🎉")
+welcome_label.pack(pady=20)  # 창에 추가하고 위아래 여백 20픽셀
+
+# 3단계: 창 보여주기 (이것이 없으면 창이 안 보여요!)
+print("창을 보여줍니다... 창을 닫으려면 X 버튼을 눌러주세요!")
+root.mainloop()
+
+print("프로그램이 종료되었습니다. 수고하셨습니다!")
 ```
 
-!!! tip "선택적 Import"
-    `try-except`를 사용하여 tkinterdnd2가 없어도 기본 기능은 동작하도록 합니다.
-    이는 배포 시 호환성을 높이는 좋은 패턴입니다.
-
-### 2. 향상된 클래스 구조
-
-```python linenums="16"
-class DragDropRenamerGUI:
-    def __init__(self):
-        if DND_AVAILABLE:
-            self.root = TkinterDnD.Tk()  # 드래그 앤 드롭 지원
-        else:
-            self.root = tk.Tk()
-        
-        self.files = []  # 파일 경로를 저장할 리스트
-        self.setup_window()
-        self.setup_widgets()
-        self.setup_drag_drop()
-```
-
-### 3. 드롭 영역 설계
-
-```python linenums="38"
-def setup_widgets(self):
-    # ... 기본 설정 ...
+!!! tip "💡 tkinter 기본 구조 이해하기"
+    **모든 tkinter 프로그램의 기본 구조:**
     
-    # 드롭 영역
-    if DND_AVAILABLE:
-        drop_info = "파일을 여기에 드래그 앤 드롭하세요"
-    else:
-        drop_info = "tkinterdnd2가 설치되지 않음. '파일 추가' 버튼을 사용하세요"
-    
-    self.drop_label = ttk.Label(
-        main_frame,
-        text=drop_info,
-        relief="solid",
-        padding="20",
-        anchor="center"
-    )
-    self.drop_label.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 10))
-```
+    1. `import tkinter as tk` → tkinter 라이브러리 가져오기
+    2. `root = tk.Tk()` → 메인 창 만들기  
+    3. 위젯들 추가하기 (버튼, 라벨 등)
+    4. `root.mainloop()` → 창 보여주고 사용자 입력 기다리기
 
-!!! note "시각적 피드백"
-    `relief="solid"`로 드롭 영역을 명확히 구분하고, 
-    라이브러리 유무에 따라 다른 안내 메시지를 표시합니다.
+### 2단계: 버튼 추가하고 클릭해보기 🔘
 
-### 4. 향상된 파일 목록 UI
+창만 있으면 재미없죠! 클릭할 수 있는 버튼을 추가해봅시다.
 
-```python linenums="58"
-    # 파일 개수 표시
-    self.count_var = tk.StringVar()
-    self.count_var.set("파일 개수: 0")
-    count_label = ttk.Label(main_frame, textvariable=self.count_var)
-    count_label.grid(row=2, column=1, sticky=tk.E, pady=(0, 5))
-    
-    # 리스트박스와 스크롤바 (수평 스크롤 추가)
-    listbox_frame = ttk.Frame(main_frame)
-    listbox_frame.grid(row=3, column=0, columnspan=2, 
-                      sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 10))
-    
-    self.files_listbox = tk.Listbox(listbox_frame, height=12, selectmode=tk.EXTENDED)
-    scrollbar_y = ttk.Scrollbar(listbox_frame, orient=tk.VERTICAL, command=self.files_listbox.yview)
-    scrollbar_x = ttk.Scrollbar(listbox_frame, orient=tk.HORIZONTAL, command=self.files_listbox.xview)
-    
-    self.files_listbox.config(yscrollcommand=scrollbar_y.set, xscrollcommand=scrollbar_x.set)
-    
-    self.files_listbox.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
-    scrollbar_y.grid(row=0, column=1, sticky=(tk.N, tk.S))
-    scrollbar_x.grid(row=1, column=0, sticky=(tk.W, tk.E))
-    
-    listbox_frame.columnconfigure(0, weight=1)
-    listbox_frame.rowconfigure(0, weight=1)
-```
+```python linenums="20" title="src/krenamer-ch2/step2_buttons.py"
+import tkinter as tk
 
-!!! tip "다중 선택 모드"
-    `selectmode=tk.EXTENDED`로 설정하여 Ctrl+클릭이나 Shift+클릭으로 
-    여러 파일을 선택할 수 있게 합니다.
+def button_clicked():
+    """버튼이 클릭되었을 때 실행되는 함수"""
+    print("🎉 버튼이 클릭되었어요!")
+    # 라벨의 텍스트를 바꿔봅시다
+    status_label.config(text="버튼이 클릭되었습니다! 👍")
 
-### 5. 향상된 버튼 영역
+def reset_button_clicked():
+    """리셋 버튼이 클릭되었을 때 실행되는 함수"""
+    print("🔄 리셋 버튼이 클릭되었어요!")
+    status_label.config(text="초기 상태로 돌아왔습니다.")
 
-```python linenums="82"
-    # 버튼 프레임
-    button_frame = ttk.Frame(main_frame)
-    button_frame.grid(row=4, column=0, columnspan=2, pady=10)
-    
-    # 파일 추가 버튼
-    add_button = ttk.Button(
-        button_frame, 
-        text="파일 추가", 
-        command=self.add_files_dialog
-    )
-    add_button.pack(side=tk.LEFT, padx=(0, 10))
-    
-    # 파일 제거 버튼
-    remove_button = ttk.Button(
-        button_frame, 
-        text="선택 제거", 
-        command=self.remove_selected_files
-    )
-    remove_button.pack(side=tk.LEFT, padx=(0, 10))
-    
-    # 모두 제거 버튼
-    clear_button = ttk.Button(
-        button_frame, 
-        text="모두 제거", 
-        command=self.clear_all_files
-    )
-    clear_button.pack(side=tk.LEFT, padx=(0, 10))
-```
+# 메인 창 설정
+root = tk.Tk()
+root.title("버튼 클릭 연습")
+root.geometry("500x400")
+root.configure(bg="lightblue")  # 배경색 설정
 
-## 🎮 드래그 앤 드롭 구현
-
-### 1. 드래그 앤 드롭 설정
-
-```python linenums="113"
-def setup_drag_drop(self):
-    if DND_AVAILABLE:
-        self.drop_label.drop_target_register(DND_FILES)
-        self.drop_label.dnd_bind('<<Drop>>', self.on_drop)
-        
-        self.files_listbox.drop_target_register(DND_FILES)
-        self.files_listbox.dnd_bind('<<Drop>>', self.on_drop)
-```
-
-!!! info "이벤트 바인딩"
-    - `drop_target_register(DND_FILES)`: 파일 드롭을 받을 수 있도록 등록
-    - `dnd_bind('<<Drop>>', handler)`: 드롭 이벤트 핸들러 연결
-
-### 2. 드롭 이벤트 처리
-
-```python linenums="120"
-def on_drop(self, event):
-    files = self.root.tk.splitlist(event.data)
-    self.add_files(files)
-```
-
-### 3. 파일 추가 다이얼로그
-
-```python linenums="124"
-def add_files_dialog(self):
-    from tkinter import filedialog
-    files = filedialog.askopenfilenames(
-        title="파일 선택",
-        filetypes=[
-            ("모든 파일", "*.*"),
-            ("텍스트 파일", "*.txt"),
-            ("이미지 파일", "*.jpg *.jpeg *.png *.gif *.bmp"),
-            ("문서 파일", "*.pdf *.doc *.docx")
-        ]
-    )
-    if files:
-        self.add_files(files)
-```
-
-!!! tip "파일 형식 필터"
-    `filetypes` 매개변수로 사용자가 특정 형식의 파일만 선택하기 쉽게 만듭니다.
-
-## 📁 파일 관리 로직
-
-### 1. 스마트 파일 추가
-
-```python linenums="137"
-def add_files(self, file_paths):
-    added_count = 0
-    
-    for file_path in file_paths:
-        if os.path.isfile(file_path) and file_path not in self.files:
-            self.files.append(file_path)
-            file_name = os.path.basename(file_path)
-            self.files_listbox.insert(tk.END, file_name)
-            added_count += 1
-    
-    self.update_file_count()
-    
-    if added_count > 0:
-        self.status_var.set(f"{added_count}개 파일이 추가되었습니다")
-    else:
-        self.status_var.set("추가할 새로운 파일이 없습니다")
-```
-
-!!! note "중복 검사"
-    - `os.path.isfile()`: 실제 파일인지 확인
-    - `file_path not in self.files`: 이미 추가된 파일인지 확인
-
-### 2. 선택적 파일 제거
-
-```python linenums="152"
-def remove_selected_files(self):
-    selection = self.files_listbox.curselection()
-    if selection:
-        # 뒤에서부터 제거 (인덱스 변경 방지)
-        for index in reversed(selection):
-            self.files_listbox.delete(index)
-            del self.files[index]
-        
-        self.update_file_count()
-        self.status_var.set(f"{len(selection)}개 파일이 제거되었습니다")
-    else:
-        self.status_var.set("제거할 파일을 선택해주세요")
-```
-
-!!! important "역순 제거"
-    리스트에서 항목을 제거할 때는 뒤에서부터 제거해야 인덱스가 꼬이지 않습니다.
-
-### 3. 전체 파일 제거
-
-```python linenums="165"
-def clear_all_files(self):
-    count = len(self.files)
-    self.files.clear()
-    self.files_listbox.delete(0, tk.END)
-    self.update_file_count()
-    self.status_var.set(f"모든 파일({count}개)이 제거되었습니다")
-```
-
-### 4. 파일 카운터 업데이트
-
-```python linenums="172"
-def update_file_count(self):
-    self.count_var.set(f"파일 개수: {len(self.files)}")
-```
-
-## 🧪 테스트 시나리오
-
-### 1. 드래그 앤 드롭 테스트
-
-=== "단일 파일"
-    1. 탐색기에서 파일 하나를 선택
-    2. 드롭 영역으로 드래그
-    3. 파일이 목록에 추가되는지 확인
-
-=== "다중 파일"
-    1. 탐색기에서 여러 파일을 선택 (Ctrl+클릭)
-    2. 드롭 영역으로 드래그
-    3. 모든 파일이 목록에 추가되는지 확인
-
-=== "폴더 드롭"
-    1. 폴더를 드래그 앤 드롭
-    2. 폴더는 무시되고 파일만 처리되는지 확인
-
-### 2. 파일 관리 테스트
-
-=== "중복 파일"
-    1. 같은 파일을 두 번 추가
-    2. 중복이 방지되는지 확인
-
-=== "다중 선택 제거"
-    1. 여러 파일을 선택 (Ctrl+클릭)
-    2. "선택 제거" 버튼 클릭
-    3. 선택된 파일들만 제거되는지 확인
-
-=== "전체 제거"
-    1. 여러 파일을 추가
-    2. "모두 제거" 버튼 클릭
-    3. 모든 파일이 제거되는지 확인
-
-## 🎨 UI/UX 개선사항
-
-### 1. 시각적 피드백
-
-```python
-# 드롭 영역 강조
-self.drop_label = ttk.Label(
-    main_frame,
-    text=drop_info,
-    relief="solid",      # 테두리 표시
-    padding="20",        # 충분한 패딩
-    anchor="center"      # 중앙 정렬
+# 제목 라벨
+title_label = tk.Label(
+    root, 
+    text="🔘 버튼 클릭 연습 프로그램", 
+    font=("맑은 고딕", 16, "bold"),
+    bg="lightblue"
 )
+title_label.pack(pady=20)
+
+# 설명 라벨
+info_label = tk.Label(
+    root,
+    text="아래 버튼들을 클릭해보세요!",
+    font=("맑은 고딕", 12),
+    bg="lightblue"
+)
+info_label.pack(pady=10)
+
+# 클릭 버튼
+click_button = tk.Button(
+    root,
+    text="클릭하세요! 🖱️",
+    command=button_clicked,  # 버튼이 클릭되면 button_clicked 함수 실행
+    font=("맑은 고딕", 14),
+    bg="lightgreen",
+    fg="black",
+    width=15,
+    height=2
+)
+click_button.pack(pady=10)
+
+# 리셋 버튼
+reset_button = tk.Button(
+    root,
+    text="리셋 🔄",
+    command=reset_button_clicked,
+    font=("맑은 고딕", 12),
+    bg="lightcoral",
+    fg="black",
+    width=10
+)
+reset_button.pack(pady=5)
+
+# 상태 표시 라벨
+status_label = tk.Label(
+    root,
+    text="버튼을 기다리고 있어요...",
+    font=("맑은 고딕", 12),
+    bg="lightblue",
+    fg="darkblue"
+)
+status_label.pack(pady=20)
+
+# 프로그램 실행
+print("버튼 연습 프로그램이 시작됩니다!")
+root.mainloop()
 ```
 
-### 2. 상태 정보 표시
-
-```python
-# 실시간 파일 개수 표시
-self.count_var.set(f"파일 개수: {len(self.files)}")
-
-# 사용자 액션에 대한 피드백
-self.status_var.set(f"{added_count}개 파일이 추가되었습니다")
-```
-
-### 3. 다양한 입력 방법 지원
-
-- **드래그 앤 드롭**: 직관적인 파일 추가
-- **파일 다이얼로그**: 전통적인 파일 선택
-- **다중 선택**: 효율적인 파일 관리
-
-## 🔍 에러 처리
-
-### 1. 라이브러리 누락 처리
-
-```python
-try:
-    from tkinterdnd2 import DND_FILES, TkinterDnD
-    DND_AVAILABLE = True
-except ImportError:
-    DND_AVAILABLE = False
-    # 기본 기능으로 fallback
-```
-
-### 2. 파일 시스템 에러
-
-```python
-def add_files(self, file_paths):
-    added_count = 0
+!!! success "🎉 축하해요!"
+    이제 버튼 클릭 이벤트를 처리할 수 있어요!
     
-    for file_path in file_paths:
-        try:
-            if os.path.isfile(file_path) and file_path not in self.files:
-                self.files.append(file_path)
-                file_name = os.path.basename(file_path)
-                self.files_listbox.insert(tk.END, file_name)
-                added_count += 1
-        except (OSError, PermissionError) as e:
-            self.status_var.set(f"파일 접근 오류: {e}")
-            continue
-```
+    **핵심 개념:**
+    - `command=함수명` → 버튼 클릭시 실행할 함수 지정
+    - `.config()` → 위젯의 속성을 나중에 변경
+    - `font`, `bg`, `fg` → 글꼴, 배경색, 글자색 설정
 
-## 🚀 실행 결과
+### 3단계: 텍스트 입력받고 처리하기 📝
 
-완성된 Chapter 2 예제를 실행하면:
+사용자가 직접 글을 입력할 수 있는 프로그램을 만들어봅시다. 파일명을 입력받아서 처리하는 연습이에요!
 
-![Chapter 2 실행 화면](assets/ch2-result.png)
-
-### 새로 추가된 기능들
-
-1. **드래그 앤 드롭 영역**: 파일을 직접 끌어다 놓을 수 있음
-2. **파일 개수 표시**: 현재 로드된 파일 수 실시간 표시
-3. **향상된 버튼**: 선택 제거, 모두 제거 기능
-4. **수평 스크롤바**: 긴 파일명도 확인 가능
-5. **다중 선택**: 여러 파일을 동시에 선택/제거 가능
-
-## 📚 핵심 개념 정리
-
-### 드래그 앤 드롭 패턴
-
-```python
-# 1. 위젯을 드롭 타겟으로 등록
-widget.drop_target_register(DND_FILES)
-
-# 2. 드롭 이벤트 바인딩
-widget.dnd_bind('<<Drop>>', self.on_drop)
-
-# 3. 이벤트 핸들러에서 데이터 처리
-def on_drop(self, event):
-    files = self.root.tk.splitlist(event.data)
-    self.process_files(files)
-```
-
-### 파일 시스템 작업
-
-```python
-import os
+```python linenums="70" title="src/krenamer-ch2/step3_text_input.py"
+import tkinter as tk
 from pathlib import Path
+import os
 
-# 파일 존재 확인
-if os.path.isfile(file_path):
-    # 파일 처리
+def process_filename():
+    """입력된 파일명을 처리하는 함수"""
+    # 입력창에서 텍스트 가져오기
+    filename = filename_entry.get()
+    
+    if not filename:
+        result_text.delete(1.0, tk.END)  # 기존 내용 삭제
+        result_text.insert(tk.END, "⚠️ 파일명을 입력해주세요!")
+        return
+    
+    # 파일명 분석하기 (Chapter 1에서 배운 내용!)
+    try:
+        file_path = Path(filename)
+        name_part = file_path.stem  # 확장자 제외한 이름
+        extension = file_path.suffix  # 확장자
+        
+        # 결과를 텍스트 박스에 표시
+        result_text.delete(1.0, tk.END)  # 기존 내용 삭제
+        result = f"""📁 파일명 분석 결과:
 
-# 파일명 추출
-file_name = os.path.basename(file_path)
+🔤 전체 파일명: {filename}
+📝 이름 부분: {name_part}
+📎 확장자: {extension}
+📏 총 글자 수: {len(filename)}글자
 
-# 경로 조작 (pathlib 사용 권장)
-path = Path(file_path)
-name = path.name
-extension = path.suffix
+✨ 변환 예시들:
+• 소문자로: {filename.lower()}
+• 대문자로: {filename.upper()}
+• 공백 제거: {filename.replace(' ', '_')}
+• 접두사 추가: NEW_{filename}
+"""
+        result_text.insert(tk.END, result)
+        
+    except Exception as e:
+        result_text.delete(1.0, tk.END)
+        result_text.insert(tk.END, f"❌ 오류가 발생했습니다: {e}")
+
+def clear_all():
+    """모든 내용 지우기"""
+    filename_entry.delete(0, tk.END)
+    result_text.delete(1.0, tk.END)
+    result_text.insert(tk.END, "입력창이 초기화되었습니다. 파일명을 입력해보세요! 📝")
+
+# 메인 창 설정
+root = tk.Tk()
+root.title("파일명 분석기")
+root.geometry("600x500")
+root.configure(bg="white")
+
+# 제목
+title_label = tk.Label(
+    root,
+    text="📁 파일명 분석기",
+    font=("맑은 고딕", 18, "bold"),
+    bg="white",
+    fg="darkblue"
+)
+title_label.pack(pady=15)
+
+# 입력 섹션
+input_frame = tk.Frame(root, bg="white")
+input_frame.pack(pady=10)
+
+input_label = tk.Label(
+    input_frame,
+    text="파일명을 입력하세요:",
+    font=("맑은 고딕", 12),
+    bg="white"
+)
+input_label.pack()
+
+filename_entry = tk.Entry(
+    input_frame,
+    font=("맑은 고딕", 12),
+    width=40,
+    justify="center"
+)
+filename_entry.pack(pady=5)
+
+# 버튼 섹션
+button_frame = tk.Frame(root, bg="white")
+button_frame.pack(pady=10)
+
+analyze_button = tk.Button(
+    button_frame,
+    text="분석하기 🔍",
+    command=process_filename,
+    font=("맑은 고딕", 12),
+    bg="lightgreen",
+    width=12
+)
+analyze_button.pack(side=tk.LEFT, padx=5)
+
+clear_button = tk.Button(
+    button_frame,
+    text="초기화 🗑️",
+    command=clear_all,
+    font=("맑은 고딕", 12),
+    bg="lightcoral",
+    width=12
+)
+clear_button.pack(side=tk.LEFT, padx=5)
+
+# 결과 표시 영역
+result_label = tk.Label(
+    root,
+    text="📋 분석 결과:",
+    font=("맑은 고딕", 12, "bold"),
+    bg="white"
+)
+result_label.pack(pady=(20, 5))
+
+result_text = tk.Text(
+    root,
+    height=15,
+    width=70,
+    font=("맑은 고딕", 10),
+    bg="lightyellow",
+    wrap=tk.WORD
+)
+result_text.pack(pady=5, padx=20)
+
+# 초기 메시지
+result_text.insert(tk.END, "파일명을 입력하고 '분석하기' 버튼을 눌러보세요! 📝")
+
+print("파일명 분석기가 시작됩니다!")
+root.mainloop()
 ```
 
-### 리스트 관리 패턴
+!!! note "🤔 새로 배운 위젯들"
+    - **Entry**: 한 줄 텍스트 입력창
+        - `.get()` → 입력된 텍스트 가져오기
+        - `.delete(0, tk.END)` → 모든 텍스트 삭제
+    
+    - **Text**: 여러 줄 텍스트 표시/입력 영역
+        - `.insert(tk.END, 텍스트)` → 텍스트 추가
+        - `.delete(1.0, tk.END)` → 모든 텍스트 삭제
+    
+    - **Frame**: 다른 위젯들을 그룹으로 묶는 컨테이너
+
+### 4단계: 파일 목록 관리하기 📋
+
+이제 진짜 KRenamer다운 기능을 만들어봅시다! 파일 목록을 추가하고 관리하는 프로그램이에요.
+
+```python linenums="150" title="src/krenamer-ch2/step4_file_list.py"
+import tkinter as tk
+from tkinter import messagebox
+
+class FileListManager:
+    """파일 목록을 관리하는 클래스"""
+    
+    def __init__(self):
+        self.files = []  # 파일 목록 저장
+        
+    def add_file(self, filename):
+        """파일 추가"""
+        if filename and filename not in self.files:
+            self.files.append(filename)
+            return True
+        return False
+    
+    def remove_file(self, filename):
+        """파일 제거"""
+        if filename in self.files:
+            self.files.remove(filename)
+            return True
+        return False
+    
+    def get_file_count(self):
+        """총 파일 개수 반환"""
+        return len(self.files)
+
+# 전역 변수
+file_manager = FileListManager()
+
+def add_file_to_list():
+    """파일을 목록에 추가하는 함수"""
+    filename = file_entry.get().strip()
+    
+    if not filename:
+        messagebox.showwarning("입력 오류", "파일명을 입력해주세요!")
+        return
+    
+    if file_manager.add_file(filename):
+        # 리스트박스에 추가
+        file_listbox.insert(tk.END, filename)
+        file_entry.delete(0, tk.END)  # 입력창 초기화
+        update_status()
+        print(f"✅ '{filename}' 파일이 추가되었습니다.")
+    else:
+        messagebox.showinfo("중복 파일", "이미 존재하는 파일명입니다!")
+
+def remove_selected_file():
+    """선택된 파일을 목록에서 제거"""
+    try:
+        selected_index = file_listbox.curselection()[0]  # 선택된 항목의 인덱스
+        selected_file = file_listbox.get(selected_index)  # 선택된 파일명
+        
+        # 파일 매니저에서 제거
+        if file_manager.remove_file(selected_file):
+            file_listbox.delete(selected_index)  # 리스트박스에서 제거
+            update_status()
+            print(f"🗑️ '{selected_file}' 파일이 제거되었습니다.")
+        
+    except IndexError:
+        messagebox.showwarning("선택 오류", "제거할 파일을 선택해주세요!")
+
+def clear_all_files():
+    """모든 파일 제거"""
+    if file_manager.get_file_count() == 0:
+        messagebox.showinfo("알림", "제거할 파일이 없습니다!")
+        return
+    
+    # 확인 대화상자
+    result = messagebox.askyesno("확인", "정말로 모든 파일을 제거하시겠습니까?")
+    if result:
+        file_manager.files.clear()
+        file_listbox.delete(0, tk.END)
+        update_status()
+        print("🧹 모든 파일이 제거되었습니다.")
+
+def update_status():
+    """상태 표시줄 업데이트"""
+    count = file_manager.get_file_count()
+    status_label.config(text=f"총 {count}개의 파일이 관리되고 있습니다.")
+
+def show_file_info():
+    """선택된 파일의 정보 표시"""
+    try:
+        selected_index = file_listbox.curselection()[0]
+        selected_file = file_listbox.get(selected_index)
+        
+        from pathlib import Path
+        file_path = Path(selected_file)
+        
+        info = f"""📁 파일 정보:
+
+📄 파일명: {selected_file}
+📝 이름: {file_path.stem}
+📎 확장자: {file_path.suffix}
+📏 길이: {len(selected_file)}글자
+📍 목록 위치: {selected_index + 1}번째
+"""
+        messagebox.showinfo("파일 정보", info)
+        
+    except IndexError:
+        messagebox.showwarning("선택 오류", "정보를 볼 파일을 선택해주세요!")
+
+# 메인 창 설정
+root = tk.Tk()
+root.title("파일 목록 관리자")
+root.geometry("700x600")
+root.configure(bg="white")
+
+# 제목
+title_label = tk.Label(
+    root,
+    text="📋 파일 목록 관리자",
+    font=("맑은 고딕", 18, "bold"),
+    bg="white",
+    fg="darkgreen"
+)
+title_label.pack(pady=15)
+
+# 파일 추가 섹션
+add_frame = tk.Frame(root, bg="white")
+add_frame.pack(pady=10)
+
+tk.Label(
+    add_frame,
+    text="추가할 파일명:",
+    font=("맑은 고딕", 12),
+    bg="white"
+).pack(side=tk.LEFT)
+
+file_entry = tk.Entry(
+    add_frame,
+    font=("맑은 고딕", 12),
+    width=30
+)
+file_entry.pack(side=tk.LEFT, padx=5)
+
+add_button = tk.Button(
+    add_frame,
+    text="추가 ➕",
+    command=add_file_to_list,
+    font=("맑은 고딕", 11),
+    bg="lightgreen"
+)
+add_button.pack(side=tk.LEFT, padx=5)
+
+# 파일 목록 표시 섹션
+list_frame = tk.Frame(root, bg="white")
+list_frame.pack(pady=10, padx=20, fill=tk.BOTH, expand=True)
+
+tk.Label(
+    list_frame,
+    text="📂 파일 목록:",
+    font=("맑은 고딕", 12, "bold"),
+    bg="white"
+).pack(anchor=tk.W)
+
+# 스크롤바가 있는 리스트박스
+scrollbar = tk.Scrollbar(list_frame)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+file_listbox = tk.Listbox(
+    list_frame,
+    font=("맑은 고딕", 11),
+    height=15,
+    yscrollcommand=scrollbar.set
+)
+file_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+scrollbar.config(command=file_listbox.yview)
+
+# 버튼 섹션
+button_frame = tk.Frame(root, bg="white")
+button_frame.pack(pady=10)
+
+remove_button = tk.Button(
+    button_frame,
+    text="선택 제거 🗑️",
+    command=remove_selected_file,
+    font=("맑은 고딕", 11),
+    bg="lightcoral"
+)
+remove_button.pack(side=tk.LEFT, padx=5)
+
+info_button = tk.Button(
+    button_frame,
+    text="파일 정보 ℹ️",
+    command=show_file_info,
+    font=("맑은 고딕", 11),
+    bg="lightblue"
+)
+info_button.pack(side=tk.LEFT, padx=5)
+
+clear_button = tk.Button(
+    button_frame,
+    text="전체 삭제 🧹",
+    command=clear_all_files,
+    font=("맑은 고딕", 11),
+    bg="orange"
+)
+clear_button.pack(side=tk.LEFT, padx=5)
+
+# 상태 표시줄
+status_label = tk.Label(
+    root,
+    text="파일을 추가해보세요!",
+    font=("맑은 고딕", 10),
+    bg="lightgray",
+    relief=tk.SUNKEN,
+    anchor=tk.W
+)
+status_label.pack(side=tk.BOTTOM, fill=tk.X)
+
+# Enter 키로 파일 추가
+file_entry.bind('<Return>', lambda event: add_file_to_list())
+
+print("파일 목록 관리자가 시작됩니다!")
+root.mainloop()
+```
+
+!!! success "🏆 대단해요!"
+    이제 진짜 프로그램 같은 기능들을 만들 수 있어요!
+    
+    **새로 배운 것들:**
+    - **Listbox**: 목록을 표시하고 선택할 수 있는 위젯
+    - **Scrollbar**: 스크롤 기능 추가
+    - **messagebox**: 알림창, 확인창 표시
+    - **이벤트 바인딩**: Enter 키 등의 키보드 이벤트 처리
+
+### 5단계: 레이아웃 관리와 예쁘게 꾸미기 🎨
+
+지금까지는 `.pack()`만 사용했는데, 더 정교한 레이아웃을 만들어봅시다!
+
+```python linenums="280" title="src/krenamer-ch2/step5_layout_design.py"
+import tkinter as tk
+from tkinter import ttk  # 더 예쁜 위젯들
+
+def create_modern_gui():
+    """현대적인 GUI 만들기"""
+    
+    root = tk.Tk()
+    root.title("현대적인 KRenamer 미리보기")
+    root.geometry("800x600")
+    root.configure(bg="#f0f0f0")
+    
+    # 스타일 설정
+    style = ttk.Style()
+    style.theme_use('clam')  # 모던한 테마
+    
+    # 메인 컨테이너
+    main_frame = ttk.Frame(root, padding="10")
+    main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+    
+    # 제목 영역 (1행)
+    title_frame = ttk.LabelFrame(main_frame, text="KRenamer - 파일명 변경 도구", padding="10")
+    title_frame.grid(row=0, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 10))
+    
+    welcome_label = ttk.Label(
+        title_frame,
+        text="🎉 KRenamer에 오신 것을 환영합니다!",
+        font=("맑은 고딕", 14, "bold")
+    )
+    welcome_label.pack()
+    
+    # 왼쪽 패널 - 파일 목록 (2행, 1열)
+    left_frame = ttk.LabelFrame(main_frame, text="📂 파일 목록", padding="10")
+    left_frame.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S), padx=(0, 5))
+    
+    # 파일 목록 (Treeview 사용)
+    file_tree = ttk.Treeview(left_frame, columns=('size', 'type'), show='tree headings', height=15)
+    file_tree.heading('#0', text='파일명')
+    file_tree.heading('size', text='크기')
+    file_tree.heading('type', text='종류')
+    
+    file_tree.column('#0', width=200)
+    file_tree.column('size', width=80)
+    file_tree.column('type', width=80)
+    
+    # 스크롤바 추가
+    tree_scroll = ttk.Scrollbar(left_frame, orient=tk.VERTICAL, command=file_tree.yview)
+    file_tree.configure(yscrollcommand=tree_scroll.set)
+    
+    file_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+    
+    # 샘플 데이터 추가
+    file_tree.insert('', tk.END, text='📄 문서1.pdf', values=('1.2MB', 'PDF'))
+    file_tree.insert('', tk.END, text='🖼️ 사진1.jpg', values=('2.5MB', 'IMAGE'))
+    file_tree.insert('', tk.END, text='🎵 음악1.mp3', values=('4.1MB', 'AUDIO'))
+    file_tree.insert('', tk.END, text='📝 메모.txt', values=('1KB', 'TEXT'))
+    
+    # 오른쪽 패널 - 설정 및 미리보기 (2행, 2열)
+    right_frame = ttk.LabelFrame(main_frame, text="⚙️ 변경 설정", padding="10")
+    right_frame.grid(row=1, column=1, sticky=(tk.W, tk.E, tk.N, tk.S), padx=(5, 0))
+    
+    # 탭 위젯으로 설정 구분
+    notebook = ttk.Notebook(right_frame)
+    notebook.pack(fill=tk.BOTH, expand=True)
+    
+    # 탭 1: 기본 설정
+    basic_tab = ttk.Frame(notebook)
+    notebook.add(basic_tab, text='기본 설정')
+    
+    # 접두사 설정
+    ttk.Label(basic_tab, text="접두사:").grid(row=0, column=0, sticky=tk.W, pady=5)
+    prefix_var = tk.StringVar(value="NEW_")
+    prefix_entry = ttk.Entry(basic_tab, textvariable=prefix_var, width=20)
+    prefix_entry.grid(row=0, column=1, sticky=(tk.W, tk.E), pady=5, padx=(5, 0))
+    
+    # 접미사 설정
+    ttk.Label(basic_tab, text="접미사:").grid(row=1, column=0, sticky=tk.W, pady=5)
+    suffix_var = tk.StringVar(value="_COPY")
+    suffix_entry = ttk.Entry(basic_tab, textvariable=suffix_var, width=20)
+    suffix_entry.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5, padx=(5, 0))
+    
+    # 옵션 체크박스들
+    ttk.Label(basic_tab, text="옵션:").grid(row=2, column=0, sticky=tk.W, pady=(15, 5))
+    
+    lowercase_var = tk.BooleanVar()
+    ttk.Checkbutton(basic_tab, text="소문자로 변환", variable=lowercase_var).grid(row=3, column=0, columnspan=2, sticky=tk.W)
+    
+    remove_spaces_var = tk.BooleanVar()
+    ttk.Checkbutton(basic_tab, text="공백 제거", variable=remove_spaces_var).grid(row=4, column=0, columnspan=2, sticky=tk.W)
+    
+    add_numbers_var = tk.BooleanVar()
+    ttk.Checkbutton(basic_tab, text="순번 추가", variable=add_numbers_var).grid(row=5, column=0, columnspan=2, sticky=tk.W)
+    
+    # 탭 2: 미리보기
+    preview_tab = ttk.Frame(notebook)
+    notebook.add(preview_tab, text='미리보기')
+    
+    ttk.Label(preview_tab, text="변경 결과 미리보기:").pack(anchor=tk.W, pady=(0, 5))
+    
+    preview_text = tk.Text(preview_tab, height=10, width=30, font=("맑은 고딕", 9))
+    preview_text.pack(fill=tk.BOTH, expand=True)
+    
+    # 샘플 미리보기 텍스트
+    preview_text.insert(tk.END, """📄 문서1.pdf → NEW_문서1_COPY.pdf
+🖼️ 사진1.jpg → NEW_사진1_COPY.jpg  
+🎵 음악1.mp3 → NEW_음악1_COPY.mp3
+📝 메모.txt → NEW_메모_COPY.txt
+
+✨ 4개 파일이 변경됩니다.""")
+    
+    # 하단 버튼 영역 (3행)
+    bottom_frame = ttk.Frame(main_frame)
+    bottom_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(10, 0))
+    
+    # 진행률 표시
+    progress_var = tk.DoubleVar()
+    progress_bar = ttk.Progressbar(bottom_frame, variable=progress_var, maximum=100)
+    progress_bar.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+    
+    # 실행 버튼들
+    ttk.Button(bottom_frame, text="미리보기 🔍", width=12).pack(side=tk.RIGHT, padx=2)
+    ttk.Button(bottom_frame, text="실행하기 ▶️", width=12).pack(side=tk.RIGHT, padx=2)
+    ttk.Button(bottom_frame, text="초기화 🔄", width=12).pack(side=tk.RIGHT, padx=2)
+    
+    # 그리드 가중치 설정 (창 크기 변경시 반응형으로)
+    root.columnconfigure(0, weight=1)
+    root.rowconfigure(0, weight=1)
+    main_frame.columnconfigure(0, weight=1)
+    main_frame.columnconfigure(1, weight=1)
+    main_frame.rowconfigure(1, weight=1)
+    
+    return root
+
+# 프로그램 실행
+if __name__ == "__main__":
+    print("🎨 현대적인 GUI 데모를 시작합니다!")
+    app = create_modern_gui()
+    app.mainloop()
+    print("프로그램이 종료되었습니다.")
+```
+
+!!! tip "🎨 GUI 디자인 팁"
+    **레이아웃 관리자 종류:**
+    - **pack()**: 간단한 수직/수평 배치
+    - **grid()**: 격자 형태로 정교한 배치 (추천!)
+    - **place()**: 절대 좌표로 배치 (특수한 경우에만)
+    
+    **ttk 위젯의 장점:**
+    - 운영체제 기본 스타일을 따라감
+    - 더 현대적이고 예쁜 외관
+    - 테마 변경 가능
+
+## 🧪 직접 해보기 (실습 과제)
+
+### 🌟 기본 도전과제
+
+#### 1. 계산기 만들기 🧮
+```python
+# 간단한 계산기 GUI를 만들어보세요!
+# 힌트: 
+# - 숫자 버튼들 (0-9)
+# - 연산자 버튼들 (+, -, *, /)
+# - 결과 표시 라벨
+# - 계산 로직 구현
+```
+
+#### 2. 색상 변경기 🎨
+```python
+# 버튼을 누르면 배경색이 바뀌는 프로그램
+# 힌트:
+# - 여러 색상 버튼들
+# - root.configure(bg="색상명") 사용
+# - 현재 색상 표시 라벨
+```
+
+### 🚀 고급 도전과제
+
+#### 3. 간단한 메모장 📝
+```python
+# 텍스트를 입력하고 저장/불러오기 기능
+# 힌트:
+# - Text 위젯 사용
+# - 파일 저장/열기 기능
+# - 메뉴바 추가 (tkinter.Menu)
+```
+
+## 🎯 Chapter 2 정리
+
+### ✅ 배운 것들 체크해보기
+
+**Tkinter 기초:**
+- [ ] 창 만들기 (`tk.Tk()`, `mainloop()`)
+- [ ] 기본 위젯들 (Label, Button, Entry, Text)
+- [ ] 이벤트 처리 (`command`, 함수 연결)
+- [ ] 레이아웃 관리 (pack, grid)
+
+**GUI 프로그래밍 개념:**
+- [ ] 사용자 인터페이스 설계
+- [ ] 이벤트 기반 프로그래밍
+- [ ] 위젯 속성 설정 (색상, 폰트, 크기)
+- [ ] 사용자 입력 처리와 검증
+
+**실전 기능들:**
+- [ ] 파일 목록 관리
+- [ ] 상태 표시 및 피드백
+- [ ] 에러 처리와 사용자 알림
+- [ ] 반응형 레이아웃
+
+### 🌟 최종 점검 문제
+
+다음 코드를 보고 어떤 GUI가 만들어질지 상상할 수 있나요?
 
 ```python
-# 중복 방지 추가
-if item not in list:
-    list.append(item)
+import tkinter as tk
 
-# 역순 제거
-for index in reversed(selection):
-    del list[index]
+root = tk.Tk()
+root.title("미스터리 프로그램")
 
-# 전체 삭제
-list.clear()
+label = tk.Label(root, text="클릭하세요!")
+button = tk.Button(root, text="마법 버튼", 
+                  command=lambda: label.config(text="마법이 일어났어요! ✨"))
+
+label.pack(pady=10)
+button.pack(pady=5)
+root.mainloop()
 ```
 
-## 🎯 다음 단계 미리보기
-
-Chapter 2에서는 파일을 관리하는 기능을 추가했습니다. 다음 [Chapter 3](chapter3.md)에서는:
-
-- **실제 파일명 변경** 로직 구현
-- **다양한 리네임 방식** 지원
-- **미리보기 기능** 추가
-- **안전한 파일 조작** 구현
+**답:** 라벨과 버튼이 있는 창이 나타나고, 버튼을 클릭하면 라벨의 텍스트가 바뀝니다!
 
 ---
 
-!!! success "Chapter 2 완료!"
-    드래그 앤 드롭 기능과 파일 관리 기능을 성공적으로 구현했습니다!
-    이제 실제로 파일명을 변경하는 핵심 기능을 만들어보겠습니다.
+!!! success "🎉 Chapter 2 완주 축하드려요!"
+    GUI 프로그래밍의 기초를 성공적으로 마스터했습니다!
+    
+    **이제 할 수 있는 것들:**
+    - ✅ 버튼, 입력창, 리스트가 있는 프로그램 만들기
+    - ✅ 사용자 클릭 이벤트 처리하기
+    - ✅ 예쁘고 사용하기 쉬운 인터페이스 디자인
+    - ✅ 파일 정보를 화면에 표시라기
+    - ✅ 현대적인 GUI 레이아웃 구성
 
-!!! tip "연습 과제"
-    - 파일 정보를 더 자세히 표시해보기 (크기, 수정일 등)
-    - 파일 형식별로 다른 아이콘 표시해보기
-    - 파일 목록을 저장/불러오기 기능 추가해보기
-    - 드롭 시 시각적 효과 추가해보기
+!!! tip "🚀 다음 단계 준비하기"
+    **Chapter 3에서는:**
+    - 드래그 앤 드롭으로 파일 가져오기
+    - 실제 파일 시스템과 연동하기
+    - 파일 탐색기와 같은 고급 기능
+    
+    Chapter 1과 2에서 배운 모든 내용이 합쳐집니다!

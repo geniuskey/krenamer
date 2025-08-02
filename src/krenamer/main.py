@@ -9,7 +9,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 try:
-    from .gui import RenamerGUI
+    from krenamer.gui import RenamerGUI
 except ImportError:
     # 직접 실행되는 경우
     import os

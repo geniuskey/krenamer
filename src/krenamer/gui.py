@@ -17,7 +17,7 @@ except ImportError:
     DND_AVAILABLE = False
 
 try:
-    from .core import RenameEngine
+    from krenamer.core import RenameEngine
 except ImportError:
     from core import RenameEngine
 

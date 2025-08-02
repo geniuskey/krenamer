@@ -1,11 +1,12 @@
-site_name: KRenamer
-site_description: Python tkinter를 사용한 한국어 Windows 파일 리네이머 개발 가이드
-site_author: GeniusKey
+site_name: KRenamer Documentation
+site_description: Python으로 배우는 완전한 소프트웨어 개발 워크플로우 - GUI 개발부터 배포까지
+site_author: KRenamer Team
 site_url: https://geniuskey.github.io/krenamer
 
 # Repository
 repo_name: geniuskey/krenamer
 repo_url: https://github.com/geniuskey/krenamer
+edit_uri: edit/main/docs/
 
 # Copyright
 copyright: Copyright &copy; 2024 GeniusKey
@@ -91,27 +92,42 @@ plugins:
 
 # Customization
 extra:
+  version:
+    provider: mike
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/geniuskey
+      link: https://github.com/geniuskey/krenamer
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/krenamer/
+    - icon: fontawesome/solid/book
+      link: https://geniuskey.github.io/krenamer
 
 # Page tree
 nav:
-  - 소개:
-    - index.md
-    - getting-started.md
-  - 개발 과정:
-    - 챕터 1 - 기본 GUI: chapter1.md
-    - 챕터 2 - 드래그 앤 드롭: chapter2.md
-    - 챕터 3 - 파일명 변경: chapter3.md
-    - 챕터 4 - 고급 기능: chapter4.md
-    - 최종 완성: final.md
-  - 기술 참고:
-    - 핵심 기술: technical-guide.md
-    - API 레퍼런스: api-reference.md
-    - 배포 가이드: deployment.md
-  - 부록:
-    - FAQ: faq.md
-    - 문제해결: troubleshooting.md
+  - 홈:
+    - 소개: index.md
+    - 시작하기: getting-started.md
+  - Part 1 - 기초 개발:
+    - Chapter 1 - Python 기초: chapter1.md
+    - Chapter 2 - Tkinter GUI 기초: chapter2.md
+    - Chapter 3 - 기본 GUI 구조: chapter3.md
+    - Chapter 4 - 드래그 앤 드롭: chapter4.md
+    - Chapter 5 - 파일명 변경 로직: chapter5.md
+    - Chapter 6 - 고급 조건과 기능: chapter6.md
+  - Part 2 - 전문 개발:
+    - Chapter 7 - 모듈화하기: chapter7.md
+    - Chapter 8 - 단위 테스트: chapter8.md
+    - Chapter 9 - MkDocs 적용: chapter9.md
+  - Part 3 - 배포와 운영:
+    - Chapter 10 - GitHub Actions: chapter10.md
+    - Chapter 11 - PyPI 배포: chapter11.md
+    - Chapter 12 - PyInstaller: chapter12.md
+#  - 기술 참고:
+#    - API 문서:
+#      - 핵심 클래스: api/core.md
+#      - GUI 컴포넌트: api/gui.md
+#      - 유틸리티: api/utils.md
+#    - 개발 가이드:
+#      - 기여하기: contributing.md
+#      - 코딩 스타일: style-guide.md
+  - 최종 완성: final.md

@@ -42,7 +42,7 @@
 
 1. **저장소 클론**
    ```bash
-   git clone https://github.com/geniuskey/renamer.git
+   git clone https://github.com/geniuskey/krenamer.git
    cd renamer
    ```
 

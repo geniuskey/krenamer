@@ -1,4 +1,4 @@
-# 최종 완성 - 배포 가능한 Renamer
+# 최종 완성 - 배포 가능한 KRenamer
 
 모든 챕터를 통해 단계별로 개발한 기능들을 통합하여 완전한 파일 리네이머 애플리케이션을 완성했습니다. 이제 실제로 사용할 수 있는 수준의 도구가 되었습니다.
 
@@ -109,20 +109,20 @@ pip install .
 === "명령행 실행"
     ```bash
     # 설치 후 어디서든
-    renamer
+    krenamer
     
     # 또는 Python 모듈로
-    python -m renamer.main
+    python -m krenamer.main
     ```
 
 === "소스코드 실행"
     ```bash
     # 최종 버전
-    cd src/renamer
+    cd src/krenamer
     python main.py
     
     # 챕터별 예제
-    cd src/renamer-ch1
+    cd src/krenamer-ch1
     python main.py
     ```
 
@@ -217,13 +217,13 @@ pip install .
 
 ```toml title="pyproject.toml"
 [project]
-name = "renamer"
+name = "krenamer"
 version = "1.0.0"
 description = "Windows GUI file renamer tool"
 dependencies = ["tkinterdnd2>=0.3.0"]
 
 [project.scripts]
-renamer = "renamer.main:main"
+renamer = "krenamer.main:main"
 ```
 
 ### 배포 명령

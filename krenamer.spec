@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 # Add src directory to path
-sys.path.insert(0, str(Path(__file__).parent / 'src'))
+sys.path.insert(0, 'src')
 
 block_cipher = None
 
@@ -15,7 +15,7 @@ a = Analysis(
     binaries=[],
     datas=[
         # Include tkinterdnd2 DLL files if they exist
-        ('venv/Lib/site-packages/tkinterdnd2/tkdnd', 'tkinterdnd2/tkdnd'),
+        ('.venv/Lib/site-packages/tkinterdnd2/tkdnd', 'tkinterdnd2/tkdnd'),
     ],
     hiddenimports=[
         'tkinterdnd2',
