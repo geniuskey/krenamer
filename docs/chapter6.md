@@ -36,7 +36,7 @@ graph TD
 
 ### 1. 필터 엔진 기반 클래스
 
-```python linenums="1" title="src/krenamer-ch4/filter_engine.py"
+```python linenums="1" title="src/krenamer-ch6/filter_engine.py"
 #!/usr/bin/env python3
 """
 고급 필터링 엔진
@@ -273,7 +273,7 @@ class FilterManager:
 
 ### 1. 설정 관리자
 
-```python linenums="1" title="src/krenamer-ch4/settings_manager.py"
+```python linenums="1" title="src/krenamer-ch6/settings_manager.py"
 #!/usr/bin/env python3
 """
 사용자 설정 관리 시스템
@@ -502,7 +502,7 @@ class SettingsManager:
 
 ### 1. 작업 히스토리 관리자
 
-```python linenums="1" title="src/krenamer-ch4/history_manager.py"
+```python linenums="1" title="src/krenamer-ch6/history_manager.py"
 #!/usr/bin/env python3
 """
 작업 히스토리 관리 시스템
@@ -778,9 +778,11 @@ class HistoryManager:
 
 ## 🎨 고급 GUI 구성요소
 
+![Chapter 6 실행 화면](images/chapter6_advanced_gui.png)
+
 ### 1. 필터 설정 다이얼로그
 
-```python linenums="1" title="src/krenamer-ch4/filter_dialog.py"
+```python linenums="1" title="src/krenamer-ch6/filter_dialog.py"
 #!/usr/bin/env python3
 """
 고급 필터 설정 다이얼로그
@@ -983,7 +985,7 @@ class FilterDialog:
 
 ### 통합된 GUI 클래스
 
-```python linenums="1" title="src/krenamer-ch4/main.py"
+```python linenums="1" title="src/krenamer-ch6/main.py"
 #!/usr/bin/env python3
 """
 Chapter 4: 고급 조건과 기능

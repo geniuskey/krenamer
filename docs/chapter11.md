@@ -546,11 +546,11 @@ KRenamer는 오픈소스 프로젝트입니다. 기여를 환영합니다!
 4. 브랜치에 푸시하세요 (`git push origin feature/amazing-feature`)
 5. Pull Request를 열어주세요
 
-자세한 내용은 [기여 가이드](CONTRIBUTING.md)를 참조하세요.
+자세한 내용은 [기여 가이드](contributing.md)를 참조하세요.
 
 ## 📄 라이선스
 
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE.md) 파일을 참조하세요.
 
 ## 🙏 감사의 말
 

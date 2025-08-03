@@ -15,7 +15,7 @@ Python 기초부터 전문적인 소프트웨어 배포까지, 실제 프로젝�
 
 ## 📚 학습 로드맵
 
-### Part 1: 기초 개발 (Chapters 1-2)
+### Part 1: 기초 개발
 Python 기초와 Tkinter GUI 기초
 
 === "Chapter 1"
@@ -30,7 +30,7 @@ Python 기초와 Tkinter GUI 기초
     
     - KRenamer 프로젝트를 위한 Tkinter 기본기
 
-### Part 2: 기초 개발 (Chapters 3-6)
+### Part 2: 기초 개발
 Python 기초부터 완성된 GUI 애플리케이션까지
 
 === "Chapter 3"
@@ -61,7 +61,7 @@ Python 기초부터 완성된 GUI 애플리케이션까지
     - 사용자 설정 관리
     - 작업 히스토리와 되돌리기
 
-### Part 3: 전문 개발 (Chapters 7-9)
+### Part 3: 전문 개발
 코드 품질, 테스팅, 문서화 등 전문적인 개발 기법
 
 === "Chapter 7"
@@ -85,7 +85,7 @@ Python 기초부터 완성된 GUI 애플리케이션까지
     - Material 테마와 다국어 지원
     - GitHub Pages 자동 배포
 
-### Part 4: 배포와 운영 (Chapters 10-12)
+### Part 4: 배포와 운영
 CI/CD, 패키지 배포, 실행파일 생성 등 운영 기술
 
 === "Chapter 10"

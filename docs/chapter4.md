@@ -23,6 +23,8 @@ pip install tkinterdnd2
 
 ## 🔧 핵심 기능 설계
 
+![드래그 앤 드롭 동작](images/drag_drop_illustration.png)
+
 ### 드래그 앤 드롭 플로우
 
 ```mermaid
@@ -47,7 +49,7 @@ graph TD
 
 ### 1. 라이브러리 Import 및 초기 설정
 
-```python linenums="1" title="src/krenamer-ch2/main.py"
+```python linenums="1" title="src/krenamer-ch4/main.py"
 #!/usr/bin/env python3
 """
 Chapter 4: Drag & Drop Functionality
@@ -87,6 +89,8 @@ class DragDropRenamerGUI:
 ```
 
 ### 3. 드롭 영역 설계
+
+![Chapter 4 드래그앤드롭 GUI](images/chapter4_dragdrop_gui.png)
 
 ```python linenums="38"
 def setup_widgets(self):
@@ -386,9 +390,9 @@ def add_files(self, file_paths):
 
 ## 🚀 실행 결과
 
-완성된 Chapter 2 예제를 실행하면:
+완성된 Chapter 4 예제를 실행하면:
 
-![Chapter 2 실행 화면](assets/ch2-result.png)
+![Chapter 4 실행 화면](images/chapter4_dragdrop_gui.png)
 
 ### 새로 추가된 기능들
 
@@ -460,7 +464,7 @@ Chapter 2에서는 파일을 관리하는 기능을 추가했습니다. 다음 [
 
 ---
 
-!!! success "Chapter 2 완료!"
+!!! success "Chapter 4 완료!"
     드래그 앤 드롭 기능과 파일 관리 기능을 성공적으로 구현했습니다!
     이제 실제로 파일명을 변경하는 핵심 기능을 만들어보겠습니다.
 

@@ -68,7 +68,7 @@ python main.py
 
 정상적으로 실행되면 다음과 같은 창이 나타납니다:
 
-![Chapter 1 Screenshot](assets/ch1-screenshot.png)
+![Chapter 1 실행 화면](images/chapter1_screenshot.png)
 
 ### 기본 기능 테스트
 
@@ -80,6 +80,8 @@ python main.py
     각 챕터별로 예제를 실행해보면서 기능이 어떻게 발전해나가는지 확인해보세요!
 
 ## 🔍 코드 구조 이해
+
+![파일 처리 흐름](images/file_operation_flow.png)
 
 ### Chapter 1의 핵심 코드
 

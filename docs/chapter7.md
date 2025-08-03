@@ -48,7 +48,7 @@ krenamer/
 
 먼저 설정과 상수를 별도 모듈로 분리합니다.
 
-```python title="src/krenamer-ch6/krenamer/config/constants.py"
+```python title="src/krenamer-ch7/krenamer/config/constants.py"
 """
 KRenamer 상수 정의
 """
@@ -103,7 +103,7 @@ MESSAGES = {
 }
 ```
 
-```python title="src/krenamer-ch6/krenamer/config/settings.py"
+```python title="src/krenamer-ch7/krenamer/config/settings.py"
 """
 KRenamer 설정 관리
 """
@@ -208,7 +208,7 @@ app_settings = Settings()
 
 ### 2. 유틸리티 모듈들
 
-```python title="src/krenamer-ch6/krenamer/utils/file_utils.py"
+```python title="src/krenamer-ch7/krenamer/utils/file_utils.py"
 """
 파일 시스템 관련 유틸리티
 """
@@ -353,7 +353,7 @@ def backup_file(file_path: str, backup_dir: Optional[str] = None) -> bool:
         return False
 ```
 
-```python title="src/krenamer-ch6/krenamer/utils/string_utils.py"
+```python title="src/krenamer-ch7/krenamer/utils/string_utils.py"
 """
 문자열 처리 관련 유틸리티
 """
@@ -483,7 +483,7 @@ def validate_regex_pattern(pattern: str) -> bool:
 
 ### 3. 코어 모듈 - 파일명 변경 엔진
 
-```python title="src/krenamer-ch6/krenamer/core/krenamer.py"
+```python title="src/krenamer-ch7/krenamer/core/krenamer.py"
 """
 파일명 변경 엔진
 """
@@ -767,7 +767,7 @@ class RenameEngine:
 
 ### 4. GUI 모듈화
 
-```python title="src/krenamer-ch6/krenamer/gui/main_window.py"
+```python title="src/krenamer-ch7/krenamer/gui/main_window.py"
 """
 메인 윈도우 GUI
 """
@@ -1000,7 +1000,7 @@ class MainWindow:
 
 ### 5. 패키지 초기화 파일들
 
-```python title="src/krenamer-ch6/krenamer/__init__.py"
+```python title="src/krenamer-ch7/krenamer/__init__.py"
 """
 KRenamer - 한국형 파일 리네이머
 
@@ -1024,7 +1024,7 @@ __all__ = [
 ]
 ```
 
-```python title="src/krenamer-ch6/krenamer/main.py"
+```python title="src/krenamer-ch7/krenamer/main.py"
 """
 KRenamer 애플리케이션 진입점
 """
@@ -1064,7 +1064,7 @@ if __name__ == "__main__":
 
 ```bash
 # 패키지 구조 확인
-cd src/krenamer-ch6
+cd src/krenamer-ch7
 find krenamer -name "*.py" | head -20
 
 # 모듈 import 테스트

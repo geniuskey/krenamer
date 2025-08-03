@@ -109,10 +109,6 @@ nav:
     - 핵심 클래스: api/core.md
     - GUI 컴포넌트: api/gui.md
     - 유틸리티: api/utils.md
-  - 개발:
-    - 기여하기: contributing.md
-    - 로드맵: roadmap.md
-    - 릴리스 노트: releases.md
 
 # Plugins
 plugins:
@@ -299,7 +295,7 @@ KRenamer는 오픈소스 프로젝트입니다. 기여를 환영합니다!
 
 ## 📄 라이선스
 
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](https://github.com/geniuskey/krenamer/blob/main/LICENSE) 파일을 참조하세요.
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE.md) 파일을 참조하세요.
 ```
 
 ### 2. 설치 가이드 (installation.md)

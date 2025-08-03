@@ -34,7 +34,7 @@ graph TD
 
 ### 1. RenameEngine 클래스 설계
 
-```python linenums="1" title="src/krenamer-ch3/rename_engine.py"
+```python linenums="1" title="src/krenamer-ch5/rename_engine.py"
 #!/usr/bin/env python3
 """
 파일명 변경 엔진
@@ -245,9 +245,11 @@ def rollback_rename(self, renamed_files: List[Tuple[str, str]]) -> Dict[str, any
 
 ## 🖥️ GUI 통합
 
+![Chapter 5 실행 화면](images/chapter5_rename_gui.png)
+
 ### 1. 메인 GUI 클래스 확장
 
-```python linenums="1" title="src/krenamer-ch3/main.py"
+```python linenums="1" title="src/krenamer-ch5/main.py"
 #!/usr/bin/env python3
 """
 Chapter 5: 파일명 변경 로직 구현
@@ -714,7 +716,7 @@ Chapter 4에서는 핵심 리네임 기능을 구현했습니다. 다음 [Chapte
 
 ---
 
-!!! success "Chapter 4 완료!"
+!!! success "Chapter 5 완료!"
     파일명 변경 핵심 로직과 미리보기 기능을 성공적으로 구현했습니다!
     이제 고급 기능과 사용자 편의성을 추가해보겠습니다.
 

@@ -8,6 +8,8 @@
 
 ## 🎯 이번 챕터에서 배울 것들
 
+![Tkinter GUI 구성요소](images/chapter2_tkinter_gui.png)
+
 우리가 만들 GUI(그래픽 사용자 인터페이스) 프로그램:
 - 🖼️ 창(윈도우) 만들기
 - 🔘 버튼 추가하고 클릭 이벤트 처리하기
@@ -147,6 +149,8 @@ root.mainloop()
     - `font`, `bg`, `fg` → 글꼴, 배경색, 글자색 설정
 
 ### 3단계: 텍스트 입력받고 처리하기 📝
+
+![Chapter 2 실행 결과](images/chapter2_screenshot.png)
 
 사용자가 직접 글을 입력할 수 있는 프로그램을 만들어봅시다. 파일명을 입력받아서 처리하는 연습이에요!
 
@@ -529,6 +533,8 @@ root.mainloop()
     - **이벤트 바인딩**: Enter 키 등의 키보드 이벤트 처리
 
 ### 5단계: 레이아웃 관리와 예쁘게 꾸미기 🎨
+
+![현대적인 GUI 레이아웃](images/modern_gui_screenshot.png)
 
 지금까지는 `.pack()`만 사용했는데, 더 정교한 레이아웃을 만들어봅시다!
 

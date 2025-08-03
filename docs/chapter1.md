@@ -8,6 +8,8 @@
 
 ## 🎯 이번 챕터에서 배울 것들
 
+![Python 기초 개념](images/chapter1_python_basics.png)
+
 우리가 만들 프로그램은 다음과 같은 일을 합니다:
 - 📁 여러 파일의 이름을 한 번에 바꾸기
 - 🔢 파일들에 순서대로 번호 매기기  
@@ -351,6 +353,8 @@ class MyFileManager:
     - `self.add_file()` → 이 관리자에게 "파일 추가해줘"라고 부탁하기
 
 ### 8단계: 파일 관리자 사용해보기 🎮
+
+![Chapter 1 실행 결과](images/chapter1_screenshot.png)
 
 이제 우리가 만든 클래스를 실제로 사용해봅시다!
 
