@@ -4,11 +4,11 @@
 
 ## 🎯 학습 목표
 
-- **MkDocs 설치**와 기본 설정
-- **문서 구조 설계**와 네비게이션 구성
+- **MkDocs 설치**<!-- -->와 기본 설정
+- **문서 구조 설계**<!-- -->와 네비게이션 구성
 - **Material 테마** 적용과 커스터마이징
 - **GitHub Pages** 배포 자동화
-- **문서 최적화**와 SEO 적용
+- **문서 최적화**<!-- -->와 SEO 적용
 
 ## 📚 MkDocs 개요
 
@@ -27,25 +27,25 @@ MkDocs는 Markdown 문서를 정적 웹사이트로 변환해주는 파이썬 �
 
 ### 1. 설치 및 초기 설정
 
-```bash title="MkDocs 설치"
+````bash title="MkDocs 설치"
 # MkDocs와 Material 테마 설치
 pip install mkdocs mkdocs-material
 
 # 플러그인 추가 설치
 pip install mkdocs-macros-plugin mkdocs-glightbox
-```
+````
 
-```bash title="프로젝트 초기화"
+````bash title="프로젝트 초기화"
 # 프로젝트 루트에서 실행
 mkdocs new .
 
 # 기본 구조 확인
 tree docs/
-```
+````
 
 ### 2. mkdocs.yml 기본 설정
 
-```yaml title="mkdocs.yml"
+````yaml title="mkdocs.yml"
 site_name: KRenamer Documentation
 site_description: Korean Windows GUI file renaming tool documentation
 site_author: KRenamer Team
@@ -155,11 +155,11 @@ extra_css:
 
 extra_javascript:
   - javascripts/extra.js
-```
+````
 
 ### 3. 문서 구조 설계
 
-```bash title="문서 디렉토리 구조"
+````bash title="문서 디렉토리 구조"
 docs/
 ├── index.md                 # 홈페이지
 ├── overview.md             # 프로젝트 개요
@@ -179,13 +179,13 @@ docs/
 │   └── extra.css
 └── javascripts/            # 커스텀 JS
     └── extra.js
-```
+````
 
 ## 📝 핵심 문서 작성
 
 ### 1. 홈페이지 (index.md)
 
-```markdown title="docs/index.md"
+````markdown title="docs/index.md"
 # KRenamer
 
 **Korean Windows GUI file renaming tool**
@@ -245,19 +245,20 @@ KRenamer는 단순한 도구를 넘어 Python GUI 프로그래밍을 학습할 �
 
 ### 튜토리얼 시리즈
 
-| 챕터 | 주제 | 난이도 |
-|------|------|--------|
-| [Chapter 1](chapter1.md) | Python 기초 | ⭐ |
-| [Chapter 2](chapter2.md) | 기본 GUI 구조 | ⭐⭐ |
-| [Chapter 3](chapter3.md) | 드래그 앤 드롭 | ⭐⭐ |
-| [Chapter 4](chapter4.md) | 파일명 변경 로직 | ⭐⭐⭐ |
-| [Chapter 5](chapter5.md) | 고급 조건과 기능 | ⭐⭐⭐ |
-| [Chapter 6](chapter6.md) | 모듈화하기 | ⭐⭐⭐⭐ |
-| [Chapter 7](chapter7.md) | 단위 테스트 | ⭐⭐⭐⭐ |
-| [Chapter 8](chapter8.md) | MkDocs 적용 | ⭐⭐⭐ |
-| [Chapter 9](chapter9.md) | GitHub Actions | ⭐⭐⭐⭐ |
-| [Chapter 10](chapter10.md) | PyPI 배포 | ⭐⭐⭐⭐ |
-| [Chapter 11](chapter11.md) | PyInstaller | ⭐⭐⭐ |
+| 챕터                         | 주제             | 난이도 |
+|----------------------------|----------------|--------|
+| [Chapter 1](chapter1.md)   | Python 기초      | ⭐ |
+| [Chapter 2](chapter2.md)   | Tkinter 기초     | ⭐⭐ |
+| [Chapter 3](chapter3.md)   | 기본 GUI 구조      | ⭐⭐ |
+| [Chapter 4](chapter4.md)   | 드래그 앤 드롭       | ⭐⭐ |
+| [Chapter 5](chapter5.md)   | 파일명 변경 로직      | ⭐⭐⭐ |
+| [Chapter 6](chapter6.md)   | 고급 조건과 기능      | ⭐⭐⭐ |
+| [Chapter 7](chapter7.md)   | 모듈화하기          | ⭐⭐⭐⭐ |
+| [Chapter 8](chapter8.md)   | 단위 테스트         | ⭐⭐⭐⭐ |
+| [Chapter 9](chapter9.md)   | MkDocs 적용      | ⭐⭐⭐ |
+| [Chapter 10](chapter10.md) | GitHub Actions | ⭐⭐⭐⭐ |
+| [Chapter 11](chapter11.md) | PyPI 배포        | ⭐⭐⭐⭐ |
+| [Chapter 12](chapter12.md) | PyInstaller    | ⭐⭐⭐ |
 
 ## 🛠️ 개발 정보
 
@@ -296,11 +297,11 @@ KRenamer는 오픈소스 프로젝트입니다. 기여를 환영합니다!
 ## 📄 라이선스
 
 이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE.md) 파일을 참조하세요.
-```
+````
 
 ### 2. 설치 가이드 (installation.md)
 
-```markdown title="docs/installation.md"
+````markdown title="docs/installation.md"
 # 설치 및 실행
 
 KRenamer를 설치하고 실행하는 다양한 방법을 안내합니다.
@@ -448,11 +449,11 @@ pip uninstall renamer
 !!! warning "설정 파일"
     제거 시 사용자 설정 파일은 자동으로 삭제되지 않습니다.
     필요하다면 `~/.krenamer/` 디렉토리를 수동으로 삭제하세요.
-```
+````
 
 ### 3. API 문서 (api/core.md)
 
-```markdown title="docs/api/core.md"
+````markdown title="docs/api/core.md"
 # Core API
 
 KRenamer의 핵심 파일 처리 엔진인 `RenameEngine` 클래스의 API 문서입니다.
@@ -726,11 +727,11 @@ engine.streaming_mode = True
     font-size: 0.8rem;
   }
 }
-```
+````
 
 ### 2. 커스텀 JavaScript
 
-```javascript title="docs/javascripts/extra.js"
+````javascript title="docs/javascripts/extra.js"
 // 다크 모드 토글 개선
 document.addEventListener('DOMContentLoaded', function() {
   // 시스템 다크 모드 감지
@@ -800,13 +801,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-```
+````
 
 ## 🚀 배포 설정
 
 ### 1. GitHub Pages 자동 배포
 
-```yaml title=".github/workflows/docs.yml"
+````yaml title=".github/workflows/docs.yml"
 name: Deploy Documentation
 
 on:
@@ -865,11 +866,11 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
-```
+````
 
 ### 2. 다중 버전 배포 (Mike)
 
-```bash title="다중 버전 관리"
+````bash title="다중 버전 관리"
 # Mike 설치
 pip install mike
 
@@ -883,22 +884,22 @@ mike set-default --push latest
 
 # 버전 목록 확인
 mike list
-```
+````
 
 ## 📊 분석 및 최적화
 
 ### 1. Google Analytics 연동
 
-```yaml title="mkdocs.yml (추가)"
+````yaml title="mkdocs.yml (추가)"
 extra:
   analytics:
     provider: google
     property: G-XXXXXXXXXX
-```
+````
 
 ### 2. SEO 최적화
 
-```yaml title="mkdocs.yml (추가)"
+````yaml title="mkdocs.yml (추가)"
 plugins:
   - meta
   - sitemap:
@@ -911,11 +912,11 @@ extra:
     keywords: "file rename, korean gui, windows tool, python"
     author: "KRenamer Team"
     og_image: "assets/images/krenamer-og.png"
-```
+````
 
 ### 3. 검색 최적화
 
-```yaml title="mkdocs.yml (추가)"
+````yaml title="mkdocs.yml (추가)"
 plugins:
   - search:
       lang: 
@@ -924,13 +925,13 @@ plugins:
       separator: '[\s\-\.]+'
       min_search_length: 2
       prebuild_index: true
-```
+````
 
 ## 🧪 문서 테스트
 
 ### 1. 링크 검증
 
-```bash title="링크 체크 스크립트"
+````bash title="링크 체크 스크립트"
 #!/bin/bash
 # check_docs.sh
 
@@ -943,11 +944,11 @@ linkchecker site/
 
 # 맞춤법 검사 (hunspell 사용)
 find docs/ -name "*.md" -exec hunspell -l -d ko_KR {} \;
-```
+````
 
 ### 2. 자동화된 문서 테스트
 
-```python title="tests/test_docs.py"
+````python title="tests/test_docs.py"
 import os
 import re
 from pathlib import Path
@@ -1017,7 +1018,7 @@ def test_docs_build():
     site_dir = Path(config['site_dir'])
     assert (site_dir / 'index.html').exists()
     assert (site_dir / 'sitemap.xml').exists()
-```
+````
 
 ## 🎯 베스트 프랙티스
 
@@ -1032,7 +1033,7 @@ def test_docs_build():
 
 ### 2. 콘텐츠 구조화
 
-```markdown
+````markdown
 # 표준 문서 구조 템플릿
 
 ## 🎯 학습 목표
@@ -1049,11 +1050,11 @@ def test_docs_build():
 
 ## 🔗 다음 단계
 - 연관 내용으로의 연결
-```
+````
 
 ### 3. 성능 최적화
 
-```yaml title="성능 최적화 설정"
+````yaml title="성능 최적화 설정"
 # 이미지 최적화
 extra:
   optimize_images: true
@@ -1069,7 +1070,7 @@ extra:
   cache:
     enabled: true
     ttl: 3600
-```
+````
 
 ## 🏁 마무리
 

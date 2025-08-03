@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 
-**KRenamer**는 Python tkinter로 개발된 한국어 고급 파일 이름 변경 도구입니다. 직관적인 한글 GUI와 강력한 조건부 필터링 기능으로 대량의 파일을 효율적으로 관리할 수 있습니다.
+**KRenamer**<!-- -->는 Python tkinter로 개발된 한국어 고급 파일 이름 변경 도구입니다. 직관적인 한글 GUI와 강력한 조건부 필터링 기능으로 대량의 파일을 효율적으로 관리할 수 있습니다.
 
 ## ✨ 주요 기능
 
