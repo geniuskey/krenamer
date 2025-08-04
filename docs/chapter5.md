@@ -24,7 +24,7 @@
 ### 우리가 만들 파일들
 
 ```
-src/krenamer-ch5/
+src/chapter5/
 ├── main.py              # GUI 화면
 └── rename_engine.py     # 파일명 변경 로직
 ```
@@ -34,7 +34,7 @@ src/krenamer-ch5/
 
 ## Step 1: 기본 엔진 클래스 만들기
 
-먼저 파일명을 바꾸는 **엔진(Engine)**<!-- -->을 만들어보겠습니다. 엔진은 자동차의 엔진처럼 **실제 일을 하는 부분**이라고 생각하면 됩니다.
+먼저 파일명을 바꾸는 **엔진(Engine)**<!-- -->을 만들어보겠습니다. 엔진은 자동차의 엔진처럼 **실제 일을 하는 부분**<!-- -->이라고 생각하면 됩니다.
 
 ### 엔진이 해야 할 일들
 
@@ -45,9 +45,9 @@ src/krenamer-ch5/
 
 ### 엔진 클래스의 기본 구조 만들기
 
-새 파일을 만들어보겠습니다: `src/krenamer-ch5/rename_engine.py`
+새 파일을 만들어보겠습니다: `src/chapter5/rename_engine.py`
 
-```python title="src/krenamer-ch5/rename_engine.py"
+```python title="src/chapter5/rename_engine.py"
 import os
 
 class RenameEngine:
@@ -58,7 +58,7 @@ class RenameEngine:
         self.files = []
 ```
 
-이게 가장 기본입니다. `self.files`는 파이썬의 **리스트**인데, 여기에 파일 경로들을 저장할 예정입니다.
+이게 가장 기본입니다. `self.files`는 파이썬의 **리스트**<!-- -->인데, 여기에 파일 경로들을 저장할 예정입니다.
 
 ### 파일 추가/제거 기능 만들기
 
@@ -103,7 +103,7 @@ def __init__(self):
 
 지금까지 만든 코드를 모두 합치면:
 
-```python title="src/krenamer-ch5/rename_engine.py (전체 코드)"
+```python title="src/chapter5/rename_engine.py (전체 코드)"
 import os
 
 class RenameEngine:
@@ -404,7 +404,7 @@ def execute_rename(self):
 
 지금까지 만든 모든 기능을 합친 완전한 코드입니다:
 
-```python title="src/krenamer-ch5/rename_engine.py (완성본)"
+```python title="src/chapter5/rename_engine.py (완성본)"
 import os
 
 class RenameEngine:
@@ -497,7 +497,7 @@ class RenameEngine:
 
 ### 1. GUI에 엔진 연결하기
 
-```python title="src/krenamer-ch5/main.py"
+```python title="src/chapter5/main.py"
 import tkinter as tk
 from tkinter import ttk, messagebox
 from rename_engine import RenameEngine

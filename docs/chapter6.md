@@ -1,6 +1,6 @@
 # Chapter 6: 고급 기능 만들기
 
-이번 챕터에서는 지금까지 만든 파일명 변경 도구를 **전문적인 프로그램**으로 업그레이드해보겠습니다.
+이번 챕터에서는 지금까지 만든 파일명 변경 도구를 **전문적인 프로그램**<!-- -->으로 업그레이드해보겠습니다.
 
 Chapter 5에서 기본적인 파일명 변경 기능을 만들었다면, 이번에는 **더 똑똑하고 편리한** 기능들을 추가해보겠습니다.
 
@@ -47,7 +47,7 @@ Chapter 5에서 기본적인 파일명 변경 기능을 만들었다면, 이번�
 
 먼저 모든 필터의 **기본 틀**<!-- -->을 만들어보겠습니다:
 
-```python title="src/krenamer-ch6/simple_filters.py"
+```python title="src/chapter6/simple_filters.py"
 class BaseFilter:
     """모든 필터의 기본 클래스"""
     
@@ -260,7 +260,7 @@ print("적용된 필터:", filter_manager.get_filter_summary())
 
 ### 간단한 설정 관리자 만들기
 
-```python title="src/krenamer-ch6/settings_manager.py"
+```python title="src/chapter6/settings_manager.py"
 import json
 import os
 from pathlib import Path
@@ -423,7 +423,7 @@ settings.save_settings()
 
 ### 간단한 작업 기록 시스템 만들기
 
-```python title="src/krenamer-ch6/simple_history.py"
+```python title="src/chapter6/simple_history.py"
 import json
 from datetime import datetime
 from pathlib import Path
@@ -580,7 +580,7 @@ print("되돌리기 결과:", rollback_result)
 
 ### 통합된 메인 애플리케이션
 
-```python title="src/krenamer-ch6/main.py"
+```python title="src/chapter6/main.py"
 import tkinter as tk
 from tkinter import ttk, messagebox
 from rename_engine import RenameEngine  # Chapter 5에서 만든 것

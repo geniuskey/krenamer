@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-KRenamer Chapter 4: File Renaming Logic
+KRenamer Chapter 5: File Renaming Logic
 파일명 변경 로직을 구현한 GUI
 
 이 챕터에서는 다음 기능을 배웁니다:
@@ -27,9 +27,9 @@ except ImportError:
 
 class RenameLogicKRenamerGUI:
     """
-    KRenamer Chapter 3: 파일명 변경 로직
+    KRenamer Chapter 5: 파일명 변경 로직
     
-    Chapter 2의 드래그 앤 드롭 기능에 실제 파일명 변경 기능을 추가합니다:
+    Chapter 4의 드래그 앤 드롭 기능에 실제 파일명 변경 기능을 추가합니다:
     - 다양한 리네임 방식 (접두사, 접미사, 순번, 찾기/바꾸기)
     - 동적 UI 필드 표시
     - 미리보기 기능
@@ -55,7 +55,7 @@ class RenameLogicKRenamerGUI:
     
     def setup_window(self):
         """윈도우 기본 설정"""
-        self.root.title("KRenamer - Chapter 3: 파일명 변경 로직")
+        self.root.title("KRenamer - Chapter 5: 파일명 변경 로직")
         self.root.geometry("900x500")
         self.root.resizable(True, True)
         self.root.minsize(800, 500)
@@ -221,7 +221,7 @@ class RenameLogicKRenamerGUI:
         self.digits_var = tk.StringVar(value="3")
         digits_combo = ttk.Combobox(number_frame, textvariable=self.digits_var, width=5, values=["1", "2", "3", "4", "5"])
         digits_combo.pack(side=tk.LEFT, padx=(5, 0))
-        self.rename_widgets['digits_combo'] = digits_combo
+        # digits_combo는 number_frame 내부에서 pack으로 관리되므로 rename_widgets에 추가하지 않음
         
         # 찾을 텍스트 입력 (찾기/바꾸기용)
         self.rename_widgets['find_label'] = ttk.Label(parent, text="찾을 텍스트:")
@@ -247,7 +247,7 @@ class RenameLogicKRenamerGUI:
         self.case_sensitive = tk.BooleanVar(value=True)
         case_check = ttk.Checkbutton(replace_options_frame, text="대소문자 구분", variable=self.case_sensitive)
         case_check.pack(side=tk.LEFT)
-        self.rename_widgets['case_check'] = case_check
+        # case_check는 replace_options_frame 내부에서 pack으로 관리되므로 rename_widgets에 추가하지 않음
     
     def update_rename_fields(self):
         """선택된 이름 변경 방식에 따라 관련 필드만 표시"""
@@ -273,7 +273,7 @@ class RenameLogicKRenamerGUI:
             self.rename_widgets['number_label'].grid()
             self.rename_widgets['number_entry'].grid()
             self.rename_widgets['number_frame'].grid()
-            self.rename_widgets['digits_combo'].grid()
+            # digits_combo는 number_frame 내부에서 pack으로 관리되므로 별도 grid 호출 불필요
         
         elif method == "replace":
             # 찾기/바꾸기: 찾을 텍스트, 바꿀 텍스트, 옵션 표시
@@ -282,7 +282,7 @@ class RenameLogicKRenamerGUI:
             self.rename_widgets['replace_label'].grid()
             self.rename_widgets['replace_entry'].grid()
             self.rename_widgets['replace_options_frame'].grid()
-            self.rename_widgets['case_check'].grid()
+            # case_check는 replace_options_frame 내부에서 pack으로 관리되므로 별도 grid 호출 불필요
         
         # 상태 메시지 업데이트
         method_descriptions = {
@@ -729,18 +729,18 @@ class RenameLogicKRenamerGUI:
 
 def main():
     """메인 함수"""
-    print("KRenamer Chapter 3: 파일명 변경 로직")
+    print("KRenamer Chapter 5: 파일명 변경 로직")
     print("=" * 40)
     print("이 예제에서 배우는 내용:")
-    print("• 다양한 리네임 방식 구현")
-    print("• 동적 UI 필드 표시")
-    print("• 미리보기 기능")
-    print("• 실제 파일명 변경 실행")
-    print("• 오류 처리 및 결과 보고")
+    print("- 다양한 리네임 방식 구현")
+    print("- 동적 UI 필드 표시")
+    print("- 미리보기 기능")
+    print("- 실제 파일명 변경 실행")
+    print("- 오류 처리 및 결과 보고")
     
     if not DND_AVAILABLE:
         print()
-        print("⚠️  tkinterdnd2가 설치되지 않았습니다.")
+        print("WARNING: tkinterdnd2가 설치되지 않았습니다.")
         print("드래그 앤 드롭 기능을 사용하려면 다음 명령어로 설치하세요:")
         print("pip install tkinterdnd2")
         print()
@@ -754,7 +754,7 @@ def main():
         print(f"애플리케이션 시작 중 오류 발생: {e}")
         return 1
     
-    print("KRenamer Chapter 3 완료!")
+    print("KRenamer Chapter 5 완료!")
     return 0
 
 

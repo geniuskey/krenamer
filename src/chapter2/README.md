@@ -14,7 +14,7 @@
 ## 📁 파일 구조
 
 ```
-src/krenamer-ch2/
+src/chapter2/
 ├── main.py                    # 학습 런처 (모든 단계를 선택해서 실행)
 ├── step1_hello_window.py      # 1단계: 첫 번째 창 만들기
 ├── step2_buttons.py           # 2단계: 버튼과 이벤트 처리
@@ -28,14 +28,14 @@ src/krenamer-ch2/
 
 ### 방법 1: 학습 런처 사용 (권장)
 ```bash
-cd src/krenamer-ch2
+cd src/chapter2
 python main.py
 ```
 학습 런처가 실행되어 각 단계를 선택해서 학습할 수 있습니다.
 
 ### 방법 2: 개별 단계 실행
 ```bash
-cd src/krenamer-ch2
+cd src/chapter2
 python step1_hello_window.py      # 1단계만 실행
 python step2_buttons.py           # 2단계만 실행
 # ... 등등

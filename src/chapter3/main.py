@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-KRenamer Chapter 2: Basic Tkinter GUI Structure
+KRenamer Chapter 3: Basic Tkinter GUI Structure
 기본적인 tkinter 윈도우를 생성하는 예제
 
 이 챕터에서는 KRenamer의 기본 GUI 구조를 배웁니다:
@@ -15,7 +15,7 @@ from tkinter import ttk
 
 class BasicKRenamerGUI:
     """
-    KRenamer Chapter 1: 기본 GUI 구조
+    KRenamer Chapter 3: 기본 GUI 구조
     
     이 클래스는 파일 리네이머의 기본적인 GUI 구조를 구현합니다.
     실제 파일 처리 기능은 다음 챕터에서 추가됩니다.
@@ -28,7 +28,7 @@ class BasicKRenamerGUI:
     
     def setup_window(self):
         """윈도우 기본 설정"""
-        self.root.title("KRenamer - Chapter 1: 기본 GUI 구조")
+        self.root.title("KRenamer - Chapter 3: 기본 GUI 구조")
         self.root.geometry("700x500")
         self.root.resizable(True, True)
         
@@ -123,7 +123,7 @@ class BasicKRenamerGUI:
         
         # 상태바
         self.status_var = tk.StringVar()
-        self.status_var.set("KRenamer Chapter 1 - 기본 GUI 구조를 학습합니다.")
+        self.status_var.set("KRenamer Chapter 3 - 기본 GUI 구조를 학습합니다.")
         
         status_frame = ttk.Frame(main_frame)
         status_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(10, 0))
@@ -212,7 +212,7 @@ class BasicKRenamerGUI:
     def rename_files(self):
         """파일명 변경 (다음 챕터에서 구현)"""
         if self.files_listbox.size() > 0:
-            self.status_var.set("이름 변경 기능은 Chapter 3에서 구현됩니다.")
+            self.status_var.set("이름 변경 기능은 Chapter 5에서 구현됩니다.")
         else:
             self.status_var.set("변경할 파일이 없습니다.")
     
@@ -243,7 +243,7 @@ class BasicKRenamerGUI:
 
 def main():
     """메인 함수"""
-    print("KRenamer Chapter 1: 기본 GUI 구조")
+    print("KRenamer Chapter 3: 기본 GUI 구조")
     print("=" * 40)
     print("이 예제에서 배우는 내용:")
     print("• tkinter 기본 위젯 사용법")
@@ -260,7 +260,7 @@ def main():
         print(f"애플리케이션 시작 중 오류 발생: {e}")
         return 1
     
-    print("KRenamer Chapter 1 완료!")
+    print("KRenamer Chapter 3 완료!")
     return 0
 
 

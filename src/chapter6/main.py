@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-KRenamer Chapter 5: Advanced Conditions and Features
+KRenamer Chapter 6: Advanced Conditions and Features
 고급 조건부 파일명 변경 기능
 
 이 챕터에서는 다음 고급 기능들을 배웁니다:
@@ -29,9 +29,9 @@ except ImportError:
 
 class AdvancedKRenamerGUI:
     """
-    KRenamer Chapter 4: 고급 조건부 파일명 변경
+    KRenamer Chapter 6: 고급 조건부 파일명 변경
     
-    Chapter 3의 기본 리네임 기능에 고급 조건과 필터링 기능을 추가합니다:
+    Chapter 5의 기본 리네임 기능에 고급 조건과 필터링 기능을 추가합니다:
     - 조건부 필터링 (파일 크기, 날짜, 확장자)
     - 정규식 패턴 매칭
     - 동적 UI 필드 표시
@@ -58,7 +58,7 @@ class AdvancedKRenamerGUI:
     
     def setup_window(self):
         """윈도우 기본 설정"""
-        self.root.title("KRenamer - Chapter 4: 고급 조건과 기능")
+        self.root.title("KRenamer - Chapter 6: 고급 조건과 기능")
         self.root.geometry("1000x600")
         self.root.resizable(True, True)
         self.root.minsize(900, 500)
@@ -252,13 +252,13 @@ class AdvancedKRenamerGUI:
         self.digits_var = tk.StringVar(value="3")
         digits_combo = ttk.Combobox(number_options_frame, textvariable=self.digits_var, width=5, values=["1", "2", "3", "4", "5"])
         digits_combo.pack(side=tk.LEFT, padx=(5, 15))
-        self.basic_widgets['digits_combo'] = digits_combo
+        # digits_combo는 number_options_frame 내부에서 pack으로 관리되므로 basic_widgets에 추가하지 않음
         
         ttk.Label(number_options_frame, text="접두사:").pack(side=tk.LEFT)
         self.number_prefix_var = tk.StringVar()
         prefix_entry = ttk.Entry(number_options_frame, textvariable=self.number_prefix_var, width=10)
         prefix_entry.pack(side=tk.LEFT, padx=(5, 0))
-        self.basic_widgets['prefix_entry'] = prefix_entry
+        # prefix_entry는 number_options_frame 내부에서 pack으로 관리되므로 basic_widgets에 추가하지 않음
         
         # 찾을 텍스트 입력 (찾기/바꾸기용)
         self.basic_widgets['find_label'] = ttk.Label(parent, text="찾을 텍스트:")
@@ -284,12 +284,12 @@ class AdvancedKRenamerGUI:
         self.case_sensitive = tk.BooleanVar(value=True)
         case_check = ttk.Checkbutton(replace_options_frame, text="대소문자 구분", variable=self.case_sensitive)
         case_check.pack(side=tk.LEFT, padx=(0, 15))
-        self.basic_widgets['case_check'] = case_check
+        # case_check는 replace_options_frame 내부에서 pack으로 관리되므로 basic_widgets에 추가하지 않음
         
         self.use_regex_basic = tk.BooleanVar()
         regex_check = ttk.Checkbutton(replace_options_frame, text="정규식 사용", variable=self.use_regex_basic)
         regex_check.pack(side=tk.LEFT)
-        self.basic_widgets['regex_check'] = regex_check
+        # regex_check는 replace_options_frame 내부에서 pack으로 관리되므로 basic_widgets에 추가하지 않음
     
     def update_basic_fields(self):
         """선택된 기본 변경 방식에 따라 관련 필드만 표시"""
@@ -315,8 +315,7 @@ class AdvancedKRenamerGUI:
             self.basic_widgets['number_label'].grid()
             self.basic_widgets['number_entry'].grid()
             self.basic_widgets['number_options_frame'].grid()
-            self.basic_widgets['digits_combo'].grid()
-            self.basic_widgets['prefix_entry'].grid()
+            # digits_combo와 prefix_entry는 number_options_frame 내부에서 pack으로 관리되므로 별도 grid 호출 불필요
         
         elif method == "replace":
             # 찾기/바꾸기: 찾을 텍스트, 바꿀 텍스트, 옵션 표시
@@ -325,8 +324,7 @@ class AdvancedKRenamerGUI:
             self.basic_widgets['replace_label'].grid()
             self.basic_widgets['replace_entry'].grid()
             self.basic_widgets['replace_options_frame'].grid()
-            self.basic_widgets['case_check'].grid()
-            self.basic_widgets['regex_check'].grid()
+            # case_check와 regex_check는 replace_options_frame 내부에서 pack으로 관리되므로 별도 grid 호출 불필요
     
     def setup_pattern_tab(self):
         """패턴 기반 탭"""
@@ -1136,7 +1134,7 @@ class AdvancedKRenamerGUI:
 
 def main():
     """메인 함수"""
-    print("KRenamer Chapter 4: 고급 조건과 기능")
+    print("KRenamer Chapter 6: 고급 조건과 기능")
     print("=" * 40)
     print("이 예제에서 배우는 내용:")
     print("• 조건부 필터링 (파일 크기, 날짜, 확장자)")
@@ -1162,7 +1160,7 @@ def main():
         print(f"애플리케이션 시작 중 오류 발생: {e}")
         return 1
     
-    print("KRenamer Chapter 4 완료!")
+    print("KRenamer Chapter 6 완료!")
     return 0
 
 

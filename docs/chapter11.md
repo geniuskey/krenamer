@@ -84,7 +84,7 @@ krenamer = "krenamer.main:main"  # 명령어로 실행 가능하게
 ```
 
 !!! tip "자세한 설정은..."
-    완전한 **pyproject.toml** 파일과 배포 스크립트는 **GitHub 레포지토리**에서 확인하세요:
+    완전한 **pyproject.toml** 파일과 배포 스크립트는 **GitHub 레포지토리**<!-- -->에서 확인하세요:
     
     - 📁 [패키지 설정 파일들](https://github.com/geniuskey/krenamer/blob/main/pyproject.toml)
     - 📖 [PyPI 배포 가이드](https://github.com/geniuskey/krenamer/blob/main/docs/deployment.md)

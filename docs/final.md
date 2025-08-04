@@ -122,7 +122,7 @@ pip install .
     python main.py
     
     # 챕터별 예제
-    cd src/krenamer-ch1
+    cd src/chapter1
     python main.py
     ```
 

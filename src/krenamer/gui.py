@@ -250,7 +250,24 @@ class RenamerGUI:
         
         ttk.Label(pattern_frame, text="치환 패턴:").grid(row=2, column=0, sticky=tk.W, pady=2)
         ttk.Entry(pattern_frame, textvariable=self.replacement, width=40).grid(row=2, column=1, sticky=(tk.W, tk.E), pady=2)
-        
+
+        # 패턴 예제
+        example_frame = ttk.LabelFrame(pattern_frame, text="정규식 패턴 예제", padding="10")
+        example_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(15, 0))
+
+        examples = [
+            "• 숫자 제거: [0-9]+ → (공백)",
+            "• 공백을 언더스코어로: \\s+ → _",
+            "• 날짜 형식 변경: (\\d{4})(\\d{2})(\\d{2}) → \\1-\\2-\\3",
+            "• 확장자 변경: \\.txt$ → .bak",
+            "• 특수문자 제거: [^\\w\\s.-] → (공백)",
+            "• 연속 공백 정리: \\s+ → (단일 공백)"
+        ]
+
+        for i, example in enumerate(examples):
+            ttk.Label(example_frame, text=example, font=("Consolas", 9)).grid(row=i, column=0, sticky=tk.W,
+                                                                              padx=(0, 20), pady=2)
+
         pattern_frame.columnconfigure(1, weight=1)
     
     def setup_conditional_tab(self):

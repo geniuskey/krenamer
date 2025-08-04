@@ -279,8 +279,8 @@ src/
 │   ├── core.py      # 파일 처리 엔진
 │   ├── gui.py       # GUI 컴포넌트
 │   └── main.py      # 메인 실행 파일
-├── krenamer-ch1/    # 교육용 챕터별 코드
-├── krenamer-ch2/
+├── chapter1/    # 교육용 챕터별 코드
+├── chapter2/
 └── ...
 ```
 
@@ -370,11 +370,11 @@ python -m krenamer.main
 
 ```bash
 # Chapter 1 (Python 기초)
-cd src/krenamer-ch1
+cd src/chapter1
 python main.py
 
 # Chapter 2 (기본 GUI)
-cd src/krenamer-ch2
+cd src/chapter2
 python main.py
 ```
 

@@ -32,7 +32,7 @@
 
 파이썬에서 정보를 저장하는 방법을 배워봅시다. 마치 서류를 정리할 때 폴더에 라벨을 붙이는 것처럼, 데이터에 이름표를 붙여주는 것입니다.
 
-```python linenums="13" title="src/krenamer-ch1/main.py"
+```python linenums="13" title="src/chapter1/main.py"
 # 간단한 정보 저장하기
 print("=== 변수 사용해보기 ===")
 

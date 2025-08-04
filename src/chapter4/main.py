@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-KRenamer Chapter 3: Drag & Drop Functionality
+KRenamer Chapter 4: Drag & Drop Functionality
 드래그 앤 드롭 기능을 추가한 GUI
 
 이 챕터에서는 다음 기능을 배웁니다:
@@ -25,9 +25,9 @@ except ImportError:
 
 class DragDropKRenamerGUI:
     """
-    KRenamer Chapter 2: 드래그 앤 드롭 기능
+    KRenamer Chapter 4: 드래그 앤 드롭 기능
     
-    Chapter 1의 기본 구조에 실제 파일 처리 기능을 추가합니다:
+    Chapter 3의 기본 구조에 실제 파일 처리 기능을 추가합니다:
     - 드래그 앤 드롭으로 파일 추가
     - 파일 대화상자로 파일 선택
     - 파일 경로와 정보 관리
@@ -49,7 +49,7 @@ class DragDropKRenamerGUI:
     
     def setup_window(self):
         """윈도우 기본 설정"""
-        self.root.title("KRenamer - Chapter 2: 드래그 앤 드롭")
+        self.root.title("KRenamer - Chapter 4: 드래그 앤 드롭")
         self.root.geometry("800x600")
         self.root.resizable(True, True)
         self.root.minsize(700, 500)
@@ -394,7 +394,7 @@ class DragDropKRenamerGUI:
     def rename_files(self):
         """파일명 변경 (다음 챕터에서 구현)"""
         if self.files:
-            self.status_var.set("이름 변경 기능은 Chapter 3에서 구현됩니다.")
+            self.status_var.set("이름 변경 기능은 Chapter 5에서 구현됩니다.")
             
             # 간단한 정보 표시
             total_size = sum(os.path.getsize(f) for f in self.files if os.path.exists(f))
@@ -403,7 +403,7 @@ class DragDropKRenamerGUI:
             messagebox.showinfo(
                 "파일 정보",
                 f"선택된 파일: {len(self.files)}개\\n총 크기: {size_str}\\n\\n"
-                "실제 이름 변경 기능은 Chapter 3에서 구현됩니다."
+                "실제 이름 변경 기능은 Chapter 5에서 구현됩니다."
             )
         else:
             self.status_var.set("변경할 파일이 없습니다.")
@@ -420,7 +420,7 @@ class DragDropKRenamerGUI:
 
 def main():
     """메인 함수"""
-    print("KRenamer Chapter 2: 드래그 앤 드롭 기능")
+    print("KRenamer Chapter 4: 드래그 앤 드롭 기능")
     print("=" * 40)
     print("이 예제에서 배우는 내용:")
     print("• tkinterdnd2를 사용한 드래그 앤 드롭")
@@ -445,7 +445,7 @@ def main():
         print(f"애플리케이션 시작 중 오류 발생: {e}")
         return 1
     
-    print("KRenamer Chapter 2 완료!")
+    print("KRenamer Chapter 4 완료!")
     return 0
 
 

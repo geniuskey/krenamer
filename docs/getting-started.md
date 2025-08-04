@@ -34,13 +34,13 @@ pip install mkdocs mkdocs-material
 ```
 krenamer/
 ├── src/
-│   ├── krenamer-ch1/        # Chapter 1: Python 기초
+│   ├── chapter1/        # Chapter 1: Python 기초
 │   │   └── main.py
-│   ├── krenamer-ch2/        # Chapter 2: Tkinter GUI 기초
+│   ├── chapter2/        # Chapter 2: Tkinter GUI 기초
 │   │   └── main.py
-│   ├── krenamer-ch3/        # Chapter 3: 기본 GUI 구조
+│   ├── chapter3/        # Chapter 3: 기본 GUI 구조
 │   │   └── main.py
-│   ├── krenamer-ch4/        # Chapter 4: 드래그 앤 드롭
+│   ├── chapter4/        # Chapter 4: 드래그 앤 드롭
 │   │   └── main.py
 │   └── krenamer/            # 최종 완성 버전
 │       ├── __init__.py
@@ -60,7 +60,7 @@ krenamer/
 
 ```bash
 # Chapter 1 디렉토리로 이동
-cd src/krenamer-ch1
+cd src/chapter1
 
 # 예제 실행
 python main.py

@@ -49,7 +49,7 @@ graph TD
 
 ### 1. 라이브러리 Import 및 초기 설정
 
-```python linenums="1" title="src/krenamer-ch4/main.py"
+```python linenums="1" title="src/chapter4/main.py"
 #!/usr/bin/env python3
 """
 Chapter 4: Drag & Drop Functionality
