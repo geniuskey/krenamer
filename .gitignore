@@ -210,6 +210,9 @@ __marimo__/
 # Claude
 .claude/
 
-
 # Dev. stuff
 *.zip
+
+# sphinx stuff
+docs/api
+docs/api-docs
