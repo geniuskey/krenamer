@@ -127,12 +127,29 @@ goto end
 echo.
 echo [DOCS] Building documentation...
 echo ===============================
-call pip install mkdocs mkdocs-material mkdocs-minify-plugin pymdown-extensions
+call pip install mkdocs mkdocs-material mkdocs-minify-plugin pymdown-extensions sphinx sphinx-rtd-theme
+echo.
+echo Building API documentation with Sphinx...
+cd docs\api-docs
+call sphinx-build -b html . _build\html
+if not %errorlevel%==0 (
+    echo [ERROR] Sphinx API documentation build failed!
+    cd ..\..
+    exit /b 1
+)
+echo Copying API docs to main documentation...
+if exist "..\api" rmdir /s /q "..\api"
+xcopy /e /i /q "_build\html" "..\api"
+cd ..\..
+echo.
+echo Building main documentation with MkDocs...
 call mkdocs build --clean
 if %errorlevel%==0 (
     echo.
     echo [SUCCESS] Documentation built successfully!
     echo Location: site/
+    echo - Main docs: site\index.html
+    echo - API docs: site\api\index.html
     echo Open site\index.html to view
 ) else (
     echo [ERROR] Documentation build failed!
@@ -144,7 +161,14 @@ goto end
 echo.
 echo [DOCS] Serving documentation locally...
 echo ======================================
-call pip install mkdocs mkdocs-material mkdocs-minify-plugin pymdown-extensions
+call pip install mkdocs mkdocs-material mkdocs-minify-plugin pymdown-extensions sphinx sphinx-rtd-theme
+echo.
+echo Building latest API documentation...
+cd docs\api-docs
+call sphinx-build -b html . _build\html
+if exist "..\api" rmdir /s /q "..\api"
+xcopy /e /i /q "_build\html" "..\api"
+cd ..\..
 echo Starting local server at http://localhost:8000
 echo Press Ctrl+C to stop
 call mkdocs serve
@@ -156,53 +180,7 @@ echo [TEST] Running KRenamer tests...
 echo =================================
 
 REM Check if pytest is available
-call python -c "import pytest" >nul 2>&1
-if %errorlevel%==0 (
-    echo Using pytest for comprehensive testing...
-    echo.
-
-    REM Run pytest with different test categories
-    echo Running core functionality tests...
-    python -m pytest tests/test_core.py tests/test_imports.py -v
-
-    if %errorlevel%==0 (
-        echo.
-        echo Running GUI component tests (non-interactive)...
-        call python -m pytest tests/test_gui_components.py -v -m "not gui"
-    )
-
-    if %errorlevel%==0 (
-        echo.
-        echo [SUCCESS] All pytest tests passed!
-    ) else (
-        echo [ERROR] Some pytest tests failed!
-        exit /b 1
-    )
-) else (
-    echo pytest not available, running basic tests...
-    echo.
-
-    REM Fallback to basic import tests since pytest is not available
-    echo Running basic import and functionality tests...
-
-    REM Test core imports
-    call python -c "import sys; sys.path.insert(0, 'src'); from krenamer.core import RenameEngine; print('✓ Core module imports successfully')"
-    if not %errorlevel%==0 exit /b 1
-
-    REM Test GUI imports
-    call python -c "import sys; sys.path.insert(0, 'src'); from krenamer.gui import RenameGUI; print('✓ GUI module imports successfully')"
-    if not %errorlevel%==0 exit /b 1
-
-    REM Test main import
-    call python -c "import sys; sys.path.insert(0, 'src'); from krenamer.main import main; print('✓ Main module imports successfully')"
-    if not %errorlevel%==0 exit /b 1
-
-    REM Test basic functionality
-    call python -c "import sys; sys.path.insert(0, 'src'); from krenamer.core import RenameEngine; e=RenameEngine(); e.method='prefix'; e.prefix_text='test_'; plan=e.generate_rename_plan(); print('✓ Basic functionality works')"
-    if not %errorlevel%==0 exit /b 1
-
-    echo [SUCCESS] All basic tests passed!
-)
+call pytest tests -v
 goto end
 
 :clean
@@ -303,7 +281,7 @@ echo     build        Build both wheel and sdist
 echo     install      Install package in development mode
 echo.
 echo   DOCUMENTATION:
-echo     docs         Build documentation (MkDocs)
+echo     docs         Build documentation (Sphinx API + MkDocs)
 echo     serve        Serve documentation locally (http://localhost:8000)
 echo.
 echo   TESTING:
