@@ -104,9 +104,8 @@ extra:
 
 # Page tree
 nav:
-  - 홈:
-    - 소개: index.md
-    - 시작하기: getting-started.md
+  - 홈: index.md
+  - 시작하기: getting-started.md
   - Part 1 - 기초와 준비:
     - Chapter 1 - Python 기초: chapter1.md
     - Chapter 2 - Tkinter GUI 기초: chapter2.md
@@ -123,12 +122,8 @@ nav:
     - Chapter 10 - GitHub Actions: chapter10.md
     - Chapter 11 - PyPI 배포: chapter11.md
     - Chapter 12 - PyInstaller: chapter12.md
-#  - 기술 참고:
-#    - API 문서:
-#      - 핵심 클래스: api/core.md
-#      - GUI 컴포넌트: api/gui.md
-#      - 유틸리티: api/utils.md
-#    - 개발 가이드:
-#      - 기여하기: contributing.md
-#      - 코딩 스타일: style-guide.md
   - 최종 완성: final.md
+  - 부록:
+    - Appendix A - AI와 함께하는 개발: appendix-a.md
+    - Appendix B - 실습 프롬프트 가이드: appendix-b.md
+  - API reference: api
