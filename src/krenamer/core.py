@@ -10,7 +10,34 @@ from pathlib import Path
 
 
 class RenameEngine:
-    """한국어 파일 이름 변경 엔진"""
+    """한국어 파일 이름 변경 엔진
+    
+    KRenamer의 핵심 파일 처리 엔진으로, 다양한 조건과 패턴을 사용하여
+    파일명을 일괄 변경하는 기능을 제공합니다.
+    
+    주요 기능:
+        - 접두사/접미사 추가
+        - 순차 번호 매기기  
+        - 찾기/바꾸기
+        - 정규식 패턴 매칭
+        - 조건부 필터링 (크기, 날짜, 확장자)
+        - 대소문자 변환 및 특수문자 처리
+    
+    Attributes:
+        files (list): 처리할 파일 경로 목록
+        method (str): 기본 이름 변경 방식 ('prefix', 'suffix', 'number', 'replace')
+        use_regex (bool): 정규식 사용 여부
+        use_size_condition (bool): 파일 크기 조건 사용 여부
+        use_date_condition (bool): 날짜 조건 사용 여부
+        use_ext_condition (bool): 확장자 조건 사용 여부
+    
+    Example:
+        >>> engine = RenameEngine()
+        >>> engine.add_files(['photo1.jpg', 'photo2.jpg'])
+        >>> engine.set_basic_rename_options('prefix', text='vacation_')
+        >>> plan = engine.generate_rename_plan()
+        >>> success_count, errors = engine.execute_rename(plan)
+    """
     
     def __init__(self):
         self.files = []
@@ -48,7 +75,19 @@ class RenameEngine:
         self.handle_duplicates = True
     
     def add_files(self, file_paths):
-        """파일 추가"""
+        """파일 목록에 파일들을 추가합니다.
+        
+        Args:
+            file_paths (list or str): 추가할 파일 경로들 (문자열 또는 리스트)
+            
+        Returns:
+            int: 실제로 추가된 파일 개수
+            
+        Note:
+            - 중복 파일은 추가되지 않습니다
+            - 존재하지 않는 파일은 무시됩니다
+            - 폴더의 경우 내부 파일들이 재귀적으로 추가됩니다
+        """
         added_count = 0
         for file_path in file_paths:
             if os.path.isfile(file_path) and file_path not in self.files:
@@ -57,17 +96,37 @@ class RenameEngine:
         return added_count
     
     def remove_files_by_indices(self, indices):
-        """인덱스로 파일 제거"""
+        """지정된 인덱스의 파일들을 목록에서 제거합니다.
+        
+        Args:
+            indices (list): 제거할 파일들의 인덱스 리스트
+            
+        Note:
+            인덱스는 역순으로 정렬되어 처리됩니다.
+        """
         for index in reversed(sorted(indices)):
             if 0 <= index < len(self.files):
                 del self.files[index]
     
     def clear_files(self):
-        """모든 파일 제거"""
+        """파일 목록을 모두 비웁니다."""
         self.files.clear()
     
     def matches_conditions(self, file_path):
-        """파일이 설정된 조건들을 만족하는지 확인"""
+        """파일이 설정된 모든 조건을 만족하는지 확인합니다.
+        
+        Args:
+            file_path (str): 검사할 파일 경로
+            
+        Returns:
+            bool: 모든 조건을 만족하면 True, 하나라도 만족하지 않으면 False
+            
+        Note:
+            다음 조건들을 검사합니다:
+                - 파일 크기 조건 (use_size_condition이 True인 경우)
+                - 수정 날짜 조건 (use_date_condition이 True인 경우)
+                - 확장자 조건 (use_ext_condition이 True인 경우)
+        """
         try:
             # 파일 크기 조건
             if self.use_size_condition:

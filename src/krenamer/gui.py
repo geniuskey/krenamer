@@ -23,6 +23,29 @@ except ImportError:
 
 
 class RenamerGUI:
+    """KRenamer의 메인 GUI 애플리케이션 클래스
+    
+    tkinter 기반의 사용자 인터페이스를 제공하며, 드래그 앤 드롭,
+    실시간 미리보기, 다양한 파일명 변경 옵션을 지원합니다.
+    
+    Features:
+        - 드래그 앤 드롭 파일 추가 (tkinterdnd2 사용)
+        - 실시간 미리보기
+        - 탭 기반 옵션 인터페이스
+        - 조건부 필터링
+        - 안전한 파일명 변경
+    
+    Attributes:
+        root (tk.Tk): 메인 윈도우
+        engine (RenameEngine): 파일 처리 엔진
+        file_tree (ttk.Treeview): 파일 목록 표시 위젯
+        notebook (ttk.Notebook): 옵션 탭 컨테이너
+    
+    Example:
+        >>> app = RenamerGUI()
+        >>> app.run()
+    """
+    
     def __init__(self):
         if DND_AVAILABLE:
             self.root = TkinterDnD.Tk()
@@ -37,6 +60,10 @@ class RenamerGUI:
         self.setup_bindings()
     
     def setup_window(self):
+        """메인 윈도우의 기본 설정을 초기화합니다.
+        
+        윈도우 제목, 크기, 위치 등을 설정합니다.
+        """
         self.root.title("KRenamer - Korean Advanced File Renaming Tool")
         self.root.geometry("1000x600")
         self.root.resizable(True, True)
