@@ -215,4 +215,4 @@ __marimo__/
 
 # sphinx stuff
 docs/api
-docs/api-docs
+docs/api-docs/_build
