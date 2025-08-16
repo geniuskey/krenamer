@@ -360,13 +360,6 @@ def main():
     
     print("=" * 60)
     print("✅ Python 기초 학습 완료!")
-    print()
-    print("다음 단계:")
-    print("- Chapter 2: 기본 GUI 구조 (tkinter)")
-    print("- Chapter 3: 드래그 앤 드롭 기능")
-    print("- Chapter 4: 파일명 변경 로직")
-    print("- Chapter 5: 고급 조건과 기능")
-    print("- 그리고 더 많은 고급 주제들...")
 
 
 if __name__ == "__main__":

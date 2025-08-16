@@ -53,8 +53,12 @@
 
 3. **프로그램 실행**
    ```bash
+   # 방법 1: 직접 실행
    cd src/krenamer
    python main.py
+   
+   # 방법 2: 모듈로 실행
+   python -m src.krenamer
    ```
 
 ### 개발자 설치 (권장)
@@ -64,6 +68,9 @@
 ```bash
 # 개발 의존성 포함 설치
 pip install -e .[dev]
+
+# 설치 후 어디서든 실행 가능
+python -m krenamer
 
 # 또는 개별 설치
 pip install tkinterdnd2 pyinstaller build twine mkdocs mkdocs-material
@@ -124,13 +131,15 @@ pip install tkinterdnd2 pyinstaller build twine mkdocs mkdocs-material
 ```
 src/krenamer/
 ├── __init__.py          # 패키지 초기화
-├── main.py             # 프로그램 진입점
-├── gui.py              # GUI 인터페이스
-└── core.py             # 파일 처리 엔진
+├── __main__.py          # 모듈 실행 진입점 (python -m)
+├── main.py              # 프로그램 진입점
+├── gui.py               # GUI 인터페이스
+└── core.py              # 파일 처리 엔진
 ```
 
 ### 주요 모듈
 
+- **`__main__.py`**: 모듈 실행 진입점 (`python -m krenamer`)
 - **`main.py`**: 애플리케이션 시작점, 오류 처리
 - **`gui.py`**: tkinter 기반 사용자 인터페이스
 - **`core.py`**: 파일 이름 변경 로직, 조건 처리
@@ -237,9 +246,12 @@ make help  # 모든 명령어 보기
 
 4. **모듈 import 오류**
    ```bash
-   # src/krenamer 폴더에서 실행해야 함
+   # 방법 1: src/krenamer 폴더에서 실행
    cd src/krenamer
    python main.py
+   
+   # 방법 2: 프로젝트 루트에서 모듈로 실행
+   python -m src.krenamer
    ```
 
 ## 🤝 기여하기
