@@ -7,11 +7,13 @@ on:
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
+      - 'src/krenamer/**'
       - '.github/workflows/docs.yml'
   pull_request:
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
+      - 'src/krenamer/**'
       - '.github/workflows/docs.yml'
 
 permissions:
@@ -54,10 +56,26 @@ jobs:
           pip install mkdocs mkdocs-material
           pip install mkdocs-minify-plugin
           pip install pymdown-extensions
+          pip install sphinx sphinx-rtd-theme
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+
+      - name: Build Sphinx API Documentation
+        run: |
+          # Build Sphinx API documentation
+          cd docs/api-docs
+          sphinx-build -b html . _build/html
+          
+          # Copy API docs to main documentation directory
+          if [ -d "../api" ]; then
+            rm -rf "../api"
+          fi
+          cp -r "_build/html" "../api"
+          cd ../..
+          
+          echo "Sphinx API documentation built successfully!"
 
       - name: Build with MkDocs
         run: |
@@ -66,11 +84,12 @@ jobs:
             export SITE_URL="${{ steps.pages.outputs.base_url }}"
           fi
           
-          # Build documentation
+          # Build documentation with MkDocs (includes the API docs from Sphinx)
           mkdocs build --clean
           
           # Verify build output
           ls -la site/
+          ls -la site/api/
           echo "Documentation built successfully!"
 
       - name: Upload artifact
