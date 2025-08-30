@@ -60,7 +60,7 @@ class FilePanel:
         listbox_frame = ttk.Frame(files_frame)
         listbox_frame.grid(row=2, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
-        self.files_listbox = tk.Listbox(listbox_frame, height=6, selectmode=tk.EXTENDED)
+        self.files_listbox = tk.Listbox(listbox_frame, height=8, selectmode=tk.EXTENDED)
         scrollbar = ttk.Scrollbar(listbox_frame, orient=tk.VERTICAL, command=self.files_listbox.yview)
         self.files_listbox.config(yscrollcommand=scrollbar.set)
         

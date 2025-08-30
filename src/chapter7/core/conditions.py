@@ -4,8 +4,10 @@
 
 import os
 from datetime import datetime
-from ..utils.file_utils import convert_size_to_bytes, get_file_modified_date
-
+try:
+    from ..utils.file_utils import convert_size_to_bytes, get_file_modified_date
+except ImportError:
+    from utils.file_utils import convert_size_to_bytes, get_file_modified_date  # noqa
 
 class FileConditionChecker:
     """파일 조건 검사 클래스"""

@@ -12,7 +12,10 @@ try:
 except ImportError:
     DND_AVAILABLE = False
 
-from ..core import RenameEngine
+try:
+    from ..core import RenameEngine
+except ImportError:
+    from core import RenameEngine  # noqa
 from .file_panel import FilePanel
 from .options_tabs import OptionsTabs
 from .preview_panel import PreviewPanel

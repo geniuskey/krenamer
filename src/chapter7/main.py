@@ -20,12 +20,7 @@ from tkinter import messagebox
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-try:
-    from chapter7.gui.main_window import RenamerGUI
-except ImportError:
-    print("오류: GUI 모듈을 찾을 수 없습니다.")
-    print("chapter7 디렉토리에서 실행해주세요.")
-    sys.exit(1)
+from gui.main_window import RenamerGUI
 
 
 def main():
