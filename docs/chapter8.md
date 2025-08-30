@@ -1060,16 +1060,6 @@ clean:
 	rm -rf .pytest_cache/
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 ```
-
-## 🎯 다음 단계 미리보기
-
-Chapter 8에서 구축한 테스트 시스템은 다음 챕터들의 기반이 됩니다:
-
-- **Chapter 9**: MkDocs로 테스트 문서까지 포함한 완전한 문서화
-- **Chapter 10**: GitHub Actions에서 자동 테스트 실행 
-- **Chapter 11**: PyPI 배포 전 테스트 검증 프로세스
-- **Chapter 12**: 실행 파일 생성 후 통합 테스트
-
 ---
 
 !!! success "테스트 시스템 완성!"

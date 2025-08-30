@@ -110,10 +110,10 @@ nav:
     - Chapter 1 - Python 기초: chapter1.md
     - Chapter 2 - Tkinter GUI 기초: chapter2.md
   - Part 2 - 핵심 기능 개발:
-    - Chapter 3 - 기본 GUI 구조: chapter3.md
-    - Chapter 4 - 드래그 앤 드롭: chapter4.md
-    - Chapter 5 - 파일명 변경 로직: chapter5.md
-    - Chapter 6 - 고급 기능 만들기: chapter6.md
+    - Chapter 3 - CLI 기반 파일 이름 변경 도구: chapter3.md
+    - Chapter 4 - GUI 개선과 사용성 향상: chapter4.md
+    - Chapter 5 - 2-패널 레이아웃과 미리보기: chapter5.md
+    - Chapter 6 - 고급 기능과 안전성: chapter6.md
   - Part 3 - 전문 개발:
     - Chapter 7 - 모듈화하기: chapter7.md
     - Chapter 8 - 단위 테스트: chapter8.md
