@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pytest-based import and installation tests for KRenamer
+Pytest-based import and installation tests for KRenamer - Chapter 8 표준
 """
 
 import sys
@@ -8,11 +8,12 @@ import pytest
 from pathlib import Path
 
 # Add src to path for testing
-project_root = Path(__file__).parent.parent
+project_root = Path(__file__).parent.parent.parent
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
 
 
+@pytest.mark.unit
 class TestImports:
     """Test KRenamer module imports"""
     
@@ -49,8 +50,9 @@ class TestImports:
         assert hasattr(krenamer, '__version__')
 
 
+@pytest.mark.unit
 class TestBasicFunctionality:
-    """Test basic KRenamer functionality"""
+    """Test basic KRenamer functionality - Chapter 8 표준"""
     
     def test_engine_basic_operations(self):
         """Test basic engine operations"""
@@ -105,8 +107,9 @@ class TestBasicFunctionality:
         assert isinstance(plan, list)
 
 
+@pytest.mark.unit
 class TestDependencies:
-    """Test required and optional dependencies"""
+    """Test required and optional dependencies - Chapter 8 표준"""
     
     def test_tkinter_available(self):
         """Test that tkinter is available"""
@@ -130,8 +133,9 @@ class TestDependencies:
             pass
 
 
+@pytest.mark.unit 
 class TestChapterExamples:
-    """Test chapter examples availability"""
+    """Test chapter examples availability - Chapter 8 표준"""
     
     def test_chapter_examples_exist(self):
         """Test that chapter examples exist"""
@@ -145,8 +149,10 @@ class TestChapterExamples:
         print(f"Found chapters: {chapters}" if chapters else "No chapter examples found")
 
 
+@pytest.mark.unit
+@pytest.mark.filesystem
 class TestFileOperations:
-    """Test file operation capabilities with real files"""
+    """Test file operation capabilities with real files - Chapter 8 표준"""
     
     def test_with_real_files(self, temp_files):
         """Test engine with real temporary files"""

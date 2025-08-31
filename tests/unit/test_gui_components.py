@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pytest-based GUI component tests for KRenamer
+Pytest-based GUI component tests for KRenamer - Chapter 8 표준
 """
 
 import sys
@@ -9,13 +9,15 @@ from pathlib import Path
 import os
 
 # Add src to path for testing
-project_root = Path(__file__).parent.parent
+project_root = Path(__file__).parent.parent.parent
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
 
 
+@pytest.mark.unit
+@pytest.mark.gui
 class TestGUIComponents:
-    """Test GUI components without requiring display"""
+    """Test GUI components without requiring display - Chapter 8 표준"""
     
     def test_gui_class_structure(self):
         """Test RenameGUI class structure"""
@@ -76,8 +78,10 @@ class TestGUIComponents:
             pytest.fail(f"GUI structure test failed: {e}")
 
 
+@pytest.mark.unit
+@pytest.mark.gui
 class TestGUIIntegration:
-    """Test GUI integration with core engine"""
+    """Test GUI integration with core engine - Chapter 8 표준"""
     
     def test_gui_engine_connection(self):
         """Test that GUI properly connects to engine"""
@@ -122,9 +126,11 @@ class TestGUIIntegration:
             assert method in class_methods, f"Setup method {method} should exist"
 
 
+@pytest.mark.integration
 @pytest.mark.gui
+@pytest.mark.slow
 class TestGUIInteractive:
-    """Interactive GUI tests (marked for optional execution)"""
+    """Interactive GUI tests (marked for optional execution) - Chapter 8 표준"""
     
     @pytest.mark.skipif(
         os.environ.get('CI') == 'true' or not (os.environ.get('DISPLAY') or os.name == 'nt'),
