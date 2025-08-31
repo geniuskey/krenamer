@@ -58,7 +58,7 @@
    python main.py
    
    # 방법 2: 모듈로 실행
-   python -m src.krenamer
+   python -m krenamer
    ```
 
 ### 개발자 설치 (권장)
@@ -70,7 +70,7 @@
 pip install -e .[dev]
 
 # 설치 후 어디서든 실행 가능
-python -m krenamer
+krenamer
 
 # 또는 개별 설치
 pip install tkinterdnd2 pyinstaller build twine mkdocs mkdocs-material
@@ -246,12 +246,16 @@ make help  # 모든 명령어 보기
 
 4. **모듈 import 오류**
    ```bash
-   # 방법 1: src/krenamer 폴더에서 실행
+   # 방법 1: 직접 실행
    cd src/krenamer
    python main.py
    
-   # 방법 2: 프로젝트 루트에서 모듈로 실행
-   python -m src.krenamer
+   # 방법 2: 패키지 설치 후 실행 (추천)
+   pip install -e .
+   krenamer
+   
+   # 방법 3: 모듈로 실행
+   python -m krenamer
    ```
 
 ## 🤝 기여하기
