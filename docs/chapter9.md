@@ -216,14 +216,14 @@ KRenamer는 윈도우 환경에서 파일명을 일괄적으로 변경할 수 �
 ### 설치
 
 ```bash
-pip install renamer
+pip install krenamer
 ```
 
 ### 실행
 
 ```bash
 # 명령어로 실행
-renamer
+krenamer
 
 # 또는 Python 모듈로 실행
 python -m krenamer.main
@@ -311,7 +311,7 @@ KRenamer를 설치하고 실행하는 다양한 방법을 안내합니다.
 ### 방법 1: PyPI에서 설치 (권장)
 
 ```bash
-pip install renamer
+pip install krenamer
 ```
 
 ### 방법 2: GitHub에서 직접 설치
@@ -429,13 +429,13 @@ chmod +x src/krenamer/main.py
 ### PyPI 버전 업데이트
 
 ```bash
-pip install --upgrade renamer
+pip install --upgrade krenamer
 ```
 
 ### 개발 버전 업데이트
 
 ```bash
-cd renamer
+cd krenamer
 git pull origin main
 pip install -e .
 ```
@@ -443,7 +443,7 @@ pip install -e .
 ## 🗑️ 제거
 
 ```bash
-pip uninstall renamer
+pip uninstall krenamer
 ```
 
 !!! warning "설정 파일"
